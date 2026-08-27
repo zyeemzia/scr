@@ -37,7 +37,7 @@
 
         .registration-container {
             background: var(--card-bg);
-            max-width: 750px;
+            max-width: 800px; /* Slightly wider to accommodate new fields */
             width: 100%;
             border-radius: 16px;
             box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.1);
@@ -56,11 +56,11 @@
         }
 
         .custom-logo {
-            max-height: 70px; /* Adjust this number to make the logo bigger or smaller */
+            max-height: 70px;
             width: auto;
             margin-right: 25px;
             object-fit: contain;
-            flex-shrink: 0; /* Ensures logo doesn't get squeezed on small screens */
+            flex-shrink: 0;
         }
 
         .header-text h1 {
@@ -92,6 +92,21 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+        }
+
+        /* Form Section Titles */
+        .section-title {
+            grid-column: 1 / -1;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 20px;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 8px;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
         /* Full width for specific fields */
@@ -197,13 +212,20 @@
         <!-- FORM SECTION -->
         <div class="form-body">
             <form action="https://formsubmit.co/zyeemz@gmail.com" method="POST" enctype="multipart/form-data">
-                <!-- FormSubmit Configuration -->
                 <input type="hidden" name="_subject" value="New Signal Corp Reunion Registration!">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://scr.zyeemzia.com"> <!-- Reloads page cleanly after sending -->
+                <input type="hidden" name="_next" value="https://scr.zyeemzia.com">
 
                 <div class="form-grid">
                     
+                    <!-- SECTION 1: Personal & Service Info -->
+                    <div class="section-title">Personal & Service Information</div>
+
+                    <div class="form-group">
+                        <label for="course">Course</label>
+                        <input type="text" id="course" name="Course" required placeholder="e.g. 1st BMA Long Course">
+                    </div>
+
                     <div class="form-group">
                         <label for="ba_no">BA No</label>
                         <input type="text" id="ba_no" name="BA No" required placeholder="e.g. BA-1234">
@@ -214,9 +236,19 @@
                         <input type="text" id="rank" name="Rank" required placeholder="e.g. Major">
                     </div>
 
-                    <div class="form-group full-width">
+                    <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="Name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="present_unit">Present Unit</label>
+                        <input type="text" id="present_unit" name="Present Unit" required placeholder="Current serving unit">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appt">Appointment</label>
+                        <input type="text" id="appt" name="Appointment" required placeholder="Current appointment">
                     </div>
 
                     <div class="form-group">
@@ -225,18 +257,74 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Phone No</label>
-                        <input type="tel" id="phone" name="Phone No" required placeholder="+880 1700-000000">
+                        <label for="phone">Mobile No</label>
+                        <input type="tel" id="phone" name="Mobile No" required placeholder="+880 1700-000000">
+                    </div>
+
+                    <!-- SECTION 2: Family Info -->
+                    <div class="section-title">Family Information</div>
+
+                    <div class="form-group full-width">
+                        <label for="spouse_name">Name of Spouse</label>
+                        <input type="text" id="spouse_name" name="Spouse Name" placeholder="Leave blank if not applicable">
                     </div>
 
                     <div class="form-group full-width">
-                        <label for="family">Family (Spouse, Children)</label>
-                        <input type="text" id="family" name="Family Info" placeholder="e.g. Spouse: Jane, 2 Children">
+                        <label for="children_info">Names & Ages of Attending Children</label>
+                        <textarea id="children_info" name="Children Info" rows="2" placeholder="e.g., John (Age: 10), Sarah (Age: 7) - Leave blank if N/A"></textarea>
+                    </div>
+
+                    <!-- SECTION 3: Logistics (ETA & ETD) -->
+                    <div class="section-title">Arrival & Departure Details</div>
+
+                    <div class="form-group">
+                        <label for="arrival_mode">Mode of Journey for Arrival</label>
+                        <select id="arrival_mode" name="Arrival Mode" required>
+                            <option value="" disabled selected>Select mode...</option>
+                            <option value="Bus">Bus</option>
+                            <option value="Train">Train</option>
+                            <option value="Air">Air</option>
+                            <option value="Own Transport">Own Transport</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="arrival_place">Place of Arrival at Jashore</label>
+                        <input type="text" id="arrival_place" name="Arrival Place" required placeholder="e.g. Cantonment Station / Airport">
                     </div>
 
                     <div class="form-group full-width">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="Message" rows="3" placeholder="Any special requests or messages..."></textarea>
+                        <label for="arrival_datetime">Date and Time of Arrival at Jashore</label>
+                        <input type="datetime-local" id="arrival_datetime" name="Arrival Date & Time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="departure_mode">Mode of Journey for Departure</label>
+                        <select id="departure_mode" name="Departure Mode" required>
+                            <option value="" disabled selected>Select mode...</option>
+                            <option value="Bus">Bus</option>
+                            <option value="Train">Train</option>
+                            <option value="Air">Air</option>
+                            <option value="Own Transport">Own Transport</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="departure_datetime">Date and Time of Dep from Jashore Cantt</label>
+                        <input type="datetime-local" id="departure_datetime" name="Departure Date & Time" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="vehicle_lift">Place upto which Veh Lift is reqr for Dep from Jashore</label>
+                        <input type="text" id="vehicle_lift" name="Vehicle Lift Required" placeholder="Leave blank if not required">
+                    </div>
+
+                    <!-- SECTION 4: Additional Info -->
+                    <div class="section-title">Additional Information</div>
+
+                    <div class="form-group full-width">
+                        <label for="message">Any Other Pt</label>
+                        <textarea id="message" name="Any Other Pt" rows="3" placeholder="Dietary requirements, special requests, or any other points..."></textarea>
                     </div>
 
                     <div class="form-group full-width">
