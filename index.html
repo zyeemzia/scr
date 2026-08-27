@@ -55,22 +55,12 @@
             border-bottom: 4px solid var(--accent);
         }
 
-        .logo-placeholder {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px dashed var(--accent);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .custom-logo {
+            max-height: 70px; /* Adjust this number to make the logo bigger or smaller */
+            width: auto;
             margin-right: 25px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            color: var(--accent);
-            font-size: 14px;
-            text-align: center;
-            flex-shrink: 0;
+            object-fit: contain;
+            flex-shrink: 0; /* Ensures logo doesn't get squeezed on small screens */
         }
 
         .header-text h1 {
@@ -184,7 +174,7 @@
         @media (max-width: 650px) {
             .form-grid { grid-template-columns: 1fr; }
             .header { flex-direction: column; text-align: center; padding: 30px 20px; }
-            .logo-placeholder { margin-right: 0; margin-bottom: 15px; }
+            .custom-logo { margin-right: 0; margin-bottom: 15px; }
             .form-body { padding: 25px 20px; }
         }
     </style>
@@ -195,8 +185,9 @@
         
         <!-- HEADER SECTION -->
         <div class="header">
-            <!-- Replace 'LOGO' text or this entire div with an <img> tag when you have your logo -->
-            <div class="logo-placeholder">LOGO</div>
+            <!-- Custom Logo Image -->
+            <img src="logo.png" alt="Signal Corp Logo" class="custom-logo">
+            
             <div class="header-text">
                 <h1>Signal Corp Reunion</h1>
                 <p>Official Registration & Coordination Portal</p>
