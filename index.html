@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signal Corps Reunion | Registration Gateway</title>
+    <title>Signal Corps Reunion | Gateway & Challenge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -15,6 +15,8 @@
             --bg-color: #f1f5f9;
             --card-bg: #ffffff;
             --text-main: #334155;
+            --danger: #ef4444;
+            --success: #10b981;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,6 +26,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -39,6 +42,7 @@
             box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.1);
             overflow: hidden;
             text-align: center;
+            margin-bottom: 30px; /* Separates the two cards */
         }
 
         .header {
@@ -77,7 +81,7 @@
         }
 
         .gateway-body {
-            padding: 50px 40px;
+            padding: 40px 40px;
         }
 
         .gateway-body h2 {
@@ -127,6 +131,84 @@
             gap: 8px;
         }
 
+        /* Game Specific Styles */
+        .game-area {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 10px;
+        }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group input {
+            padding: 12px;
+            width: 100%;
+            max-width: 350px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        .signal-box {
+            width: 100%;
+            height: 120px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.1s;
+            margin-bottom: 20px;
+            user-select: none;
+        }
+
+        .btn-small {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 12px 30px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .btn-small:hover { transform: scale(1.05); }
+
+        .leaderboard {
+            margin-top: 35px;
+            text-align: left;
+        }
+        
+        .leaderboard h3 { 
+            font-family: 'Rajdhani', sans-serif; 
+            border-bottom: 2px solid var(--accent); 
+            padding-bottom: 8px; 
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .rank-row { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 12px 10px; 
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .rank-row:nth-child(even) { background: #f8fafc; }
+        .rank-email { font-weight: 500; color: var(--text-main); }
+        .rank-score { color: var(--primary); font-weight: 700; font-family: monospace; font-size: 16px;}
+
         @media (max-width: 650px) {
             .header { flex-direction: column; text-align: center; }
             .custom-logo { margin-right: 0; margin-bottom: 15px; }
@@ -138,8 +220,8 @@
 </head>
 <body>
 
+    <!-- SECTION 1: REGISTRATION GATEWAY -->
     <div class="registration-container">
-        
         <div class="header">
             <img src="logo.png" alt="Signal Corps Logo" class="custom-logo">
             <div class="header-text">
@@ -152,7 +234,6 @@
             <h2>Welcome to the Registration Portal</h2>
             <p>To ensure secure handling of your logistical details, arrival/departure schedules, and required file attachments, please proceed to the encrypted Google Registration Form below.</p>
             
-            <!-- PASTE YOUR GOOGLE FORM LINK IN THE href="..." ATTRIBUTE BELOW -->
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBKM9HzDL8IOlKR7FDWcEVAuX2Y7cmXL4jv9gMfZxd9ljAfQ/viewform?usp=publish-editor" class="cta-btn" target="_blank" rel="noopener noreferrer">
                 Proceed to Secure Form
             </a>
@@ -162,8 +243,145 @@
                 Powered by Google Forms & Google Sheets
             </div>
         </div>
-
     </div>
 
+    <!-- SECTION 2: OPERATION SIGNAL RELAY GAME -->
+    <div class="registration-container">
+        <div class="gateway-body">
+            <h2>Challenge: Operation Signal Relay</h2>
+            <p style="margin-bottom: 25px;">Test your reaction speed. Enter your email, click Start, and wait for the signal to turn GREEN. Click as fast as you can to rank on the live leaderboard!</p>
+
+            <div class="game-area">
+                <div class="input-group">
+                    <input type="email" id="playerEmail" placeholder="Enter your email to rank..." required>
+                </div>
+                
+                <div id="signalBox" class="signal-box">SYSTEM STANDBY</div>
+                
+                <button id="startBtn" class="btn-small">INITIATE SEQUENCE</button>
+                <p id="gameMessage" style="margin-top: 15px; font-weight: bold; color: var(--primary);"></p>
+            </div>
+
+            <!-- LIVE LEADERBOARD -->
+            <div class="leaderboard">
+                <h3>Top 5 Operators (Fastest Reactions)</h3>
+                <div id="leaderboardList">
+                    <div class="rank-row"><em>Loading secure data...</em></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME JAVASCRIPT LOGIC -->
+    <script>
+        // The Google Apps Script API Link
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6tQ11n0oaUYNwM9dLzN8GwXhLEnbMwiGJlzVuNhOB7wa6rNrrqxOnY9tkEHWanYfkDA/exec";
+        
+        const signalBox = document.getElementById('signalBox');
+        const startBtn = document.getElementById('startBtn');
+        const playerEmail = document.getElementById('playerEmail');
+        const gameMessage = document.getElementById('gameMessage');
+        const leaderboardList = document.getElementById('leaderboardList');
+        
+        let gameState = 'idle'; // idle, waiting, ready
+        let startTime = 0;
+        let timeoutId = null;
+
+        // Fetch Leaderboard on page load
+        function loadLeaderboard() {
+            fetch(SCRIPT_URL)
+                .then(response => response.json())
+                .then(data => {
+                    leaderboardList.innerHTML = '';
+                    if(data.length === 0) {
+                        leaderboardList.innerHTML = '<div class="rank-row">No records yet. Be the first to transmit!</div>';
+                        return;
+                    }
+                    data.forEach((entry, index) => {
+                        let row = document.createElement('div');
+                        row.className = 'rank-row';
+                        // Masks the email slightly for privacy on the public board
+                        let maskedEmail = entry.email.split('@')[0] + '@***';
+                        row.innerHTML = `<span class="rank-email">${index + 1}. ${maskedEmail}</span>
+                                         <span class="rank-score">${entry.score} ms</span>`;
+                        leaderboardList.appendChild(row);
+                    });
+                }).catch(err => {
+                    console.log('Leaderboard fetch error', err);
+                    leaderboardList.innerHTML = '<div class="rank-row">Unable to load leaderboard.</div>';
+                });
+        }
+
+        // Initialize Leaderboard
+        loadLeaderboard();
+
+        // Start Game Engine
+        startBtn.addEventListener('click', () => {
+            if(!playerEmail.value.includes('@')) {
+                alert("Please enter a valid email to participate.");
+                return;
+            }
+            
+            gameState = 'waiting';
+            startBtn.style.display = 'none';
+            gameMessage.innerText = "Wait for the GREEN signal...";
+            signalBox.style.background = "var(--danger)";
+            signalBox.innerText = "WAIT...";
+            
+            // Random delay between 2 and 5 seconds
+            let delay = Math.floor(Math.random() * 3000) + 2000;
+            
+            timeoutId = setTimeout(() => {
+                gameState = 'ready';
+                signalBox.style.background = "var(--success)";
+                signalBox.innerText = "TRANSMIT NOW!";
+                startTime = Date.now();
+            }, delay);
+        });
+
+        // Click detection
+        signalBox.addEventListener('mousedown', () => {
+            if(gameState === 'idle') return;
+            
+            if(gameState === 'waiting') {
+                // Clicked too early (False start)
+                clearTimeout(timeoutId);
+                gameState = 'idle';
+                signalBox.style.background = "var(--primary)";
+                signalBox.innerText = "SYSTEM STANDBY";
+                gameMessage.innerText = "False Start! You clicked too early.";
+                startBtn.style.display = 'inline-block';
+                startBtn.innerText = "RETRY";
+            } 
+            else if(gameState === 'ready') {
+                // Successful reaction
+                let reactionTime = Date.now() - startTime;
+                gameState = 'idle';
+                signalBox.style.background = "var(--primary)";
+                signalBox.innerText = "SYSTEM STANDBY";
+                gameMessage.innerText = `Excellent! Reaction time: ${reactionTime} ms. Transmitting to HQ...`;
+                
+                // Send data to Google Sheets
+                const formData = new URLSearchParams();
+                formData.append('email', playerEmail.value);
+                formData.append('score', reactionTime);
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).then(() => {
+                    gameMessage.innerText = `Score saved: ${reactionTime} ms!`;
+                    startBtn.style.display = 'inline-block';
+                    startBtn.innerText = "PLAY AGAIN";
+                    loadLeaderboard(); // Refresh the board instantly
+                }).catch(err => {
+                    gameMessage.innerText = `Error saving score. Please try again.`;
+                    startBtn.style.display = 'inline-block';
+                    startBtn.innerText = "RETRY";
+                });
+            }
+        });
+    </script>
 </body>
 </html>
