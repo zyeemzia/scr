@@ -3,22 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signal Corps Reunion | Registration</title>
+    <title>Signal Corp Reunion | Registration Gateway</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* =========================================
-           BASE STYLING & MILITARY/CORP THEME
-           ========================================= */
         :root {
-            --primary: #0f172a; /* Deep Navy */
-            --accent: #d4af37; /* Metallic Gold */
+            --primary: #0f172a; 
+            --accent: #d4af37; 
             --bg-color: #f1f5f9;
             --card-bg: #ffffff;
             --text-main: #334155;
-            --border-light: #cbd5e1;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,21 +33,21 @@
 
         .registration-container {
             background: var(--card-bg);
-            max-width: 800px; /* Slightly wider to accommodate new fields */
+            max-width: 650px; 
             width: 100%;
             border-radius: 16px;
             box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.1);
             overflow: hidden;
-            position: relative;
+            text-align: center;
         }
 
-        /* Top Header with Logo */
         .header {
             background: var(--primary);
             color: white;
             padding: 30px 40px;
             display: flex;
             align-items: center;
+            justify-content: center;
             border-bottom: 4px solid var(--accent);
         }
 
@@ -63,9 +59,11 @@
             flex-shrink: 0;
         }
 
+        .header-text { text-align: left; }
+
         .header-text h1 {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 34px;
+            font-size: 30px;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 5px;
@@ -73,124 +71,68 @@
 
         .header-text p {
             color: #94a3b8;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Form Layout */
-        .form-body { padding: 40px; }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        /* Form Section Titles */
-        .section-title {
-            grid-column: 1 / -1;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 20px;
-            color: var(--accent);
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 8px;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        /* Full width for specific fields */
-        .full-width { grid-column: 1 / -1; }
-
-        label {
-            font-weight: 600;
             font-size: 13px;
-            color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
-        input, textarea, select {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 15px;
-            background: #f8fafc;
-            transition: all 0.3s ease;
+        .gateway-body {
+            padding: 50px 40px;
+        }
+
+        .gateway-body h2 {
+            font-family: 'Rajdhani', sans-serif;
             color: var(--primary);
+            font-size: 26px;
+            margin-bottom: 15px;
         }
 
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        .gateway-body p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            color: var(--text-main);
         }
 
-        /* File Upload Styling */
-        input[type="file"] {
-            background: #ffffff;
-            border: 2px dashed var(--border-light);
-            padding: 20px;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        /* Submit Button */
-        .submit-btn {
+        .cta-btn {
+            display: inline-block;
             background: var(--primary);
             color: white;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            border: none;
+            text-decoration: none;
             border-radius: 8px;
-            padding: 16px;
-            width: 100%;
-            cursor: pointer;
-            margin-top: 15px;
+            padding: 18px 40px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
         }
 
-        .submit-btn:hover {
+        .cta-btn:hover {
             background: #1e293b;
-            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(15, 23, 42, 0.4);
+            color: var(--accent);
         }
 
-        .submit-btn::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
+        .security-note {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .submit-btn:hover::after { transform: translateX(100%); }
-
-        /* Responsive */
         @media (max-width: 650px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .header { flex-direction: column; text-align: center; padding: 30px 20px; }
+            .header { flex-direction: column; text-align: center; }
             .custom-logo { margin-right: 0; margin-bottom: 15px; }
-            .form-body { padding: 25px 20px; }
+            .header-text { text-align: center; }
+            .gateway-body { padding: 40px 20px; }
+            .cta-btn { padding: 15px 25px; font-size: 18px; width: 100%; }
         }
     </style>
 </head>
@@ -198,145 +140,29 @@
 
     <div class="registration-container">
         
-        <!-- HEADER SECTION -->
         <div class="header">
-            <!-- Custom Logo Image -->
             <img src="logo.png" alt="Signal Corp Logo" class="custom-logo">
-            
             <div class="header-text">
-                <h1>Signal Corps Reunion</h1>
-                <p>Official Registration & Coordination Portal</p>
+                <h1>Signal Corp Reunion</h1>
+                <p>Official Coordination Portal</p>
             </div>
         </div>
 
-        <!-- FORM SECTION -->
-        <div class="form-body">
-            <form action="https://formsubmit.co/zyeemz@gmail.com" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="_subject" value="New Signal Corps Reunion Registration!">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://scr.zyeemzia.com">
+        <div class="gateway-body">
+            <h2>Welcome to the Registration Portal</h2>
+            <p>To ensure secure handling of your logistical details, arrival/departure schedules, and required file attachments, please proceed to the encrypted Google Registration Form below.</p>
+            
+            <!-- PASTE YOUR GOOGLE FORM LINK IN THE href="..." ATTRIBUTE BELOW -->
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBKM9HzDL8IOlKR7FDWcEVAuX2Y7cmXL4jv9gMfZxd9ljAfQ/viewform?usp=publish-editor" class="cta-btn" target="_blank" rel="noopener noreferrer">
+                Proceed to Secure Form
+            </a>
 
-                <div class="form-grid">
-                    
-                    <!-- SECTION 1: Personal & Service Info -->
-                    <div class="section-title">Personal & Service Information</div>
-
-                    <div class="form-group">
-                        <label for="course">Course</label>
-                        <input type="text" id="course" name="Course" required placeholder="e.g. 1st BMA Long Course">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ba_no">BA No</label>
-                        <input type="text" id="ba_no" name="BA No" required placeholder="e.g. BA-1234">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rank">Rank</label>
-                        <input type="text" id="rank" name="Rank" required placeholder="e.g. Major">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="Name" required placeholder="Enter your full name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="present_unit">Present Unit</label>
-                        <input type="text" id="present_unit" name="Present Unit" required placeholder="Current serving unit">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="appt">Appointment</label>
-                        <input type="text" id="appt" name="Appointment" required placeholder="Current appointment">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="Email Address" required placeholder="name@domain.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Mobile No</label>
-                        <input type="tel" id="phone" name="Mobile No" required placeholder="+880 1700-000000">
-                    </div>
-
-                    <!-- SECTION 2: Family Info -->
-                    <div class="section-title">Family Information</div>
-
-                    <div class="form-group full-width">
-                        <label for="spouse_name">Name of Spouse</label>
-                        <input type="text" id="spouse_name" name="Spouse Name" placeholder="Leave blank if not applicable">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="children_info">Names & Ages of Attending Children</label>
-                        <textarea id="children_info" name="Children Info" rows="2" placeholder="e.g., John (Age: 10), Sarah (Age: 7) - Leave blank if N/A"></textarea>
-                    </div>
-
-                    <!-- SECTION 3: Logistics (ETA & ETD) -->
-                    <div class="section-title">Arrival & Departure Details</div>
-
-                    <div class="form-group">
-                        <label for="arrival_mode">Mode of Journey for Arrival</label>
-                        <select id="arrival_mode" name="Arrival Mode" required>
-                            <option value="" disabled selected>Select mode...</option>
-                            <option value="Bus">Bus</option>
-                            <option value="Train">Train</option>
-                            <option value="Air">Air</option>
-                            <option value="Own Transport">Own Transport</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="arrival_place">Place of Arrival at Jashore</label>
-                        <input type="text" id="arrival_place" name="Arrival Place" required placeholder="e.g. Cantonment Station / Airport">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="arrival_datetime">Date and Time of Arrival at Jashore</label>
-                        <input type="datetime-local" id="arrival_datetime" name="Arrival Date & Time" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="departure_mode">Mode of Journey for Departure</label>
-                        <select id="departure_mode" name="Departure Mode" required>
-                            <option value="" disabled selected>Select mode...</option>
-                            <option value="Bus">Bus</option>
-                            <option value="Train">Train</option>
-                            <option value="Air">Air</option>
-                            <option value="Own Transport">Own Transport</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="departure_datetime">Date and Time of Dep from Jashore Cantt</label>
-                        <input type="datetime-local" id="departure_datetime" name="Departure Date & Time" required>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="vehicle_lift">Place upto which Veh Lift is reqr for Dep from Jashore</label>
-                        <input type="text" id="vehicle_lift" name="Vehicle Lift Required" placeholder="Leave blank if not required">
-                    </div>
-
-                    <!-- SECTION 4: Additional Info -->
-                    <div class="section-title">Additional Information</div>
-
-                    <div class="form-group full-width">
-                        <label for="message">Any Other Pt</label>
-                        <textarea id="message" name="Any Other Pt" rows="3" placeholder="Dietary requirements, special requests, or any other points..."></textarea>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="attachment">Attachment (Optional Photo / ID)</label>
-                        <input type="file" id="attachment" name="Attachment" accept="image/*,.pdf">
-                    </div>
-
-                </div>
-
-                <button type="submit" class="submit-btn">Submit Registration</button>
-            </form>
+            <div class="security-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Powered by Google Forms & Google Sheets
+            </div>
         </div>
+
     </div>
 
 </body>
