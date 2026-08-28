@@ -79,14 +79,11 @@
             transition: all 0.3s ease;
             box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
         }
-
         .cta-btn:hover { background: #1e293b; transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(15, 23, 42, 0.4); color: var(--accent); }
 
         .security-note { margin-top: 30px; font-size: 12px; color: #94a3b8; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
-        /* =========================================
-           RADAR GAME GRAPHICAL STYLES
-           ========================================= */
+        /* RADAR GAME STYLES */
         .game-area {
             background: #f8fafc;
             border: 2px dashed #cbd5e1;
@@ -96,6 +93,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .input-group { margin-bottom: 20px; width: 100%; max-width: 320px; }
+        .input-group input {
+            padding: 12px;
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 16px;
+            text-align: center;
         }
 
         .game-hud {
@@ -110,7 +118,6 @@
             margin-bottom: 15px;
         }
 
-        /* The Circular Radar Screen */
         .radar-screen {
             position: relative;
             width: 300px;
@@ -122,17 +129,12 @@
             box-shadow: 0 0 25px rgba(16, 185, 129, 0.4) inset, 0 10px 20px rgba(0,0,0,0.1);
             margin-bottom: 20px;
             user-select: none;
-            touch-action: manipulation; /* Improves tapping on mobile */
+            touch-action: manipulation;
         }
 
-        /* Radar Grid Lines */
         .radar-grid {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 100%; height: 100%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            position: absolute; top: 50%; left: 50%; width: 100%; height: 100%;
+            transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(16, 185, 129, 0.3);
         }
         .radar-grid::before { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgba(16, 185, 129, 0.4); }
         .radar-grid::after { content: ''; position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: rgba(16, 185, 129, 0.4); }
@@ -141,34 +143,21 @@
             border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 50%;
         }
 
-        /* The Sweeping Animation */
         .radar-sweep {
-            position: absolute;
-            top: 0; left: 50%;
-            width: 50%; height: 50%;
+            position: absolute; top: 0; left: 50%; width: 50%; height: 50%;
             background: conic-gradient(from 90deg, rgba(16,185,129,0) 0%, rgba(16,185,129,0.1) 80%, rgba(16,185,129,0.8) 100%);
             transform-origin: bottom left;
             animation: sweep 2s linear infinite;
             border-right: 2px solid var(--radar-green);
-            display: none; /* Hidden until game starts */
+            display: none; 
         }
-
         @keyframes sweep { 100% { transform: rotate(360deg); } }
 
-        /* The Hostile Signals (Clickable Targets) */
         .target-ping {
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            background: var(--danger);
-            border-radius: 50%;
-            box-shadow: 0 0 12px var(--danger);
-            cursor: pointer;
-            transform: translate(-50%, -50%);
-            animation: pulse 1s infinite;
-            z-index: 10;
+            position: absolute; width: 18px; height: 18px; background: var(--danger); border-radius: 50%;
+            box-shadow: 0 0 12px var(--danger); cursor: pointer; transform: translate(-50%, -50%);
+            animation: pulse 1s infinite; z-index: 10;
         }
-
         @keyframes pulse {
             0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
             50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.8; }
@@ -176,22 +165,21 @@
         }
 
         .btn-small {
-            background: var(--accent);
-            color: var(--primary);
-            border: none;
-            padding: 12px 35px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            text-transform: uppercase;
+            background: var(--accent); color: var(--primary); border: none; padding: 12px 35px;
+            font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700;
+            border-radius: 6px; cursor: pointer; transition: transform 0.2s; text-transform: uppercase;
         }
-        
         .btn-small:hover { transform: scale(1.05); }
 
         #gameMessage { margin-top: 15px; font-weight: 600; font-size: 18px; color: var(--primary); font-family: 'Rajdhani', sans-serif;}
+
+        /* LEADERBOARD STYLES */
+        .leaderboard { margin-top: 35px; text-align: left; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto;}
+        .leaderboard h3 { font-family: 'Rajdhani', sans-serif; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 15px; color: var(--primary);}
+        .rank-row { display: flex; justify-content: space-between; padding: 12px 10px; border-bottom: 1px solid #e2e8f0;}
+        .rank-row:nth-child(even) { background: #f8fafc; }
+        .rank-email { font-weight: 500; color: var(--text-main); }
+        .rank-score { color: var(--primary); font-weight: 700; font-family: monospace; font-size: 16px;}
 
         @media (max-width: 650px) {
             .header { flex-direction: column; text-align: center; }
@@ -230,20 +218,23 @@
         </div>
     </div>
 
-    <!-- SECTION 2: GRAPHICAL RADAR GAME -->
+    <!-- SECTION 2: GRAPHICAL RADAR GAME & LEADERBOARD -->
     <div class="registration-container">
         <div class="gateway-body" style="padding-top: 30px;">
             <h2>Challenge: Signal Intercept</h2>
-            <p style="margin-bottom: 25px; font-size: 15px;">Tap the unauthorized signal pings before they fade. You have 20 seconds to intercept as many as possible to determine your rank!</p>
+            <p style="margin-bottom: 25px; font-size: 15px;">Tap the unauthorized signal pings before they fade. You have 20 seconds to intercept as many as possible to secure your rank on the live board!</p>
 
             <div class="game-area">
                 
+                <div class="input-group">
+                    <input type="email" id="playerEmail" placeholder="Enter email to rank..." required>
+                </div>
+
                 <div class="game-hud">
                     <span id="timeDisplay">TIME: 20s</span>
                     <span id="scoreDisplay">INTERCEPTS: 0</span>
                 </div>
 
-                <!-- Radar Graphics -->
                 <div class="radar-screen" id="radarScreen">
                     <div class="radar-grid"></div>
                     <div class="radar-ring"></div>
@@ -254,17 +245,31 @@
                 <p id="gameMessage"></p>
 
             </div>
+
+            <!-- LIVE LEADERBOARD -->
+            <div class="leaderboard">
+                <h3>Top 5 Operators (Highest Intercepts)</h3>
+                <div id="leaderboardList">
+                    <div class="rank-row"><em>Loading secure data...</em></div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- RADAR GAME JAVASCRIPT LOGIC -->
+    <!-- SCRIPT LOGIC -->
     <script>
+        // --- PASTE YOUR NEW GOOGLE APPS SCRIPT WEB APP URL HERE ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA5R94vgaOzK292EuJLABDlGx8ol5jbcIFdS_-pV_GOG2I_kYcLlGJvKC0t0BSz9WxWA/exec";
+
         const radarScreen = document.getElementById('radarScreen');
         const radarSweep = document.getElementById('radarSweep');
         const startBtn = document.getElementById('startBtn');
         const timeDisplay = document.getElementById('timeDisplay');
         const scoreDisplay = document.getElementById('scoreDisplay');
         const gameMessage = document.getElementById('gameMessage');
+        const playerEmail = document.getElementById('playerEmail');
+        const leaderboardList = document.getElementById('leaderboardList');
 
         let score = 0;
         let timeLeft = 20;
@@ -272,50 +277,66 @@
         let spawnerInterval = null;
         let isPlaying = false;
 
-        // Function to create a random signal ping
+        // FETCH LEADERBOARD (Using GET request to avoid CORS block)
+        function loadLeaderboard(urlAction = "?action=getTop") {
+            fetch(SCRIPT_URL + urlAction)
+                .then(response => response.json())
+                .then(data => {
+                    leaderboardList.innerHTML = '';
+                    if(data.length === 0) {
+                        leaderboardList.innerHTML = '<div class="rank-row">No records yet. Be the first!</div>';
+                        return;
+                    }
+                    data.forEach((entry, index) => {
+                        let row = document.createElement('div');
+                        row.className = 'rank-row';
+                        let maskedEmail = entry.email.split('@')[0] + '@***';
+                        row.innerHTML = `<span class="rank-email">${index + 1}. ${maskedEmail}</span>
+                                         <span class="rank-score">${entry.score} pts</span>`;
+                        leaderboardList.appendChild(row);
+                    });
+                }).catch(err => {
+                    console.log(err);
+                    leaderboardList.innerHTML = '<div class="rank-row">Unable to load leaderboard.</div>';
+                });
+        }
+
+        // Initialize Leaderboard on load
+        loadLeaderboard();
+
+        // Target Spawner
         function spawnTarget() {
             if (!isPlaying) return;
-
             const target = document.createElement('div');
             target.classList.add('target-ping');
             
-            // Keep targets within the circle (roughly 10% to 90% of width/height)
             const randomX = Math.floor(Math.random() * 80) + 10;
             const randomY = Math.floor(Math.random() * 80) + 10;
-            
             target.style.left = randomX + '%';
             target.style.top = randomY + '%';
 
-            // Tap/Click event for the target
-            target.addEventListener('mousedown', function() {
-                if (!isPlaying) return;
-                score++;
-                scoreDisplay.innerText = `INTERCEPTS: ${score}`;
-                target.remove(); // Target destroyed
-            });
-
-            // Mobile touch support
-            target.addEventListener('touchstart', function(e) {
-                e.preventDefault(); // Prevents zooming on double tap
+            const hitTarget = (e) => {
+                e.preventDefault();
                 if (!isPlaying) return;
                 score++;
                 scoreDisplay.innerText = `INTERCEPTS: ${score}`;
                 target.remove();
-            });
+            };
 
+            target.addEventListener('mousedown', hitTarget);
+            target.addEventListener('touchstart', hitTarget);
             radarScreen.appendChild(target);
 
-            // Target vanishes if not clicked in time (1.2 seconds)
-            setTimeout(() => {
-                if (target.parentElement) {
-                    target.remove();
-                }
-            }, 1200);
+            setTimeout(() => { if (target.parentElement) target.remove(); }, 1200);
         }
 
-        // Start Game Engine
+        // Start Game
         startBtn.addEventListener('click', () => {
-            // Reset Game Variables
+            if(!playerEmail.value.includes('@')) {
+                alert("Please enter a valid email to track your score.");
+                return;
+            }
+
             score = 0;
             timeLeft = 20;
             isPlaying = true;
@@ -323,47 +344,42 @@
             timeDisplay.innerText = `TIME: 20s`;
             gameMessage.innerText = "";
             startBtn.style.display = 'none';
-            
-            // Turn on radar animation
+            playerEmail.disabled = true; // Lock email input during game
             radarSweep.style.display = 'block';
 
-            // Clear any old targets
             document.querySelectorAll('.target-ping').forEach(el => el.remove());
-
-            // Spawner Loop: Spawns a target every 600ms
             spawnerInterval = setInterval(spawnTarget, 600);
 
-            // Timer Loop
             gameInterval = setInterval(() => {
                 timeLeft--;
                 timeDisplay.innerText = `TIME: ${timeLeft}s`;
-
-                if (timeLeft <= 0) {
-                    endGame();
-                }
+                if (timeLeft <= 0) endGame();
             }, 1000);
         });
 
-        // End Game Logic
+        // End Game & Save Score
         function endGame() {
             isPlaying = false;
             clearInterval(gameInterval);
             clearInterval(spawnerInterval);
-            radarSweep.style.display = 'none'; // Turn off radar
+            radarSweep.style.display = 'none'; 
             startBtn.style.display = 'inline-block';
             startBtn.innerText = 'SCAN AGAIN';
+            playerEmail.disabled = false;
             
-            // Remove remaining targets
             document.querySelectorAll('.target-ping').forEach(el => el.remove());
 
-            // Determine Rank based on score
-            let rank = "";
-            if (score < 10) { rank = "Recruit (Keep practicing)"; }
-            else if (score >= 10 && score <= 20) { rank = "Field Operator (Solid work)"; }
-            else if (score > 20 && score <= 30) { rank = "Comm Commander (Excellent)"; }
-            else { rank = "Master of Signals (Legendary!)"; }
+            gameMessage.innerHTML = `SCAN COMPLETE. Intercepts: ${score}.<br><span style="color:#64748b; font-size: 14px;">Transmitting to HQ...</span>`;
 
-            gameMessage.innerHTML = `SCAN COMPLETE.<br>Total Intercepts: <span style="color:var(--danger)">${score}</span><br>Awarded Rank: <strong>${rank}</strong>`;
+            // Save Score using GET request bypass
+            const saveUrl = SCRIPT_URL + "?action=save&email=" + encodeURIComponent(playerEmail.value) + "&score=" + score;
+            
+            // This fetch saves the score AND returns the updated leaderboard instantly
+            loadLeaderboard("?action=save&email=" + encodeURIComponent(playerEmail.value) + "&score=" + score);
+            
+            setTimeout(() => {
+                gameMessage.innerHTML = `SCAN COMPLETE.<br>Total Intercepts: <span style="color:var(--danger)">${score}</span>`;
+            }, 1500);
         }
     </script>
 </body>
