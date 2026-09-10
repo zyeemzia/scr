@@ -7,15 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
     <style>
         /* =========================================
            DYNAMIC THEME VARIABLES
            ========================================= */
         :root {
             /* DEFAULT: Modern Sky Deep Blue */
-            --primary: #0c4a6e; 
-            --accent: #38bdf8; 
+            --primary: #0c4a6e;
+            --accent: #38bdf8;
             --bg-color: #f0f9ff;
             --card-bg: #ffffff;
             --text-main: #0f172a;
@@ -24,8 +24,8 @@
         }
 
         body.theme-tactical {
-            --primary: #2c3e2d; 
-            --accent: #d4af37; 
+            --primary: #2c3e2d;
+            --accent: #d4af37;
             --bg-color: #e8ede7;
             --card-bg: #ffffff;
             --text-main: #2d372c;
@@ -34,8 +34,8 @@
         }
 
         body.theme-night-ops {
-            --primary: #000000; 
-            --accent: #39ff14; 
+            --primary: #000000;
+            --accent: #39ff14;
             --bg-color: #0a0a0a;
             --card-bg: #1a1a1a;
             --text-main: #e2e8f0;
@@ -44,8 +44,8 @@
         }
 
         body.theme-desert {
-            --primary: #5c4a3d; 
-            --accent: #d97706; 
+            --primary: #5c4a3d;
+            --accent: #d97706;
             --bg-color: #f4ecd8;
             --card-bg: #ffffff;
             --text-main: #3d3126;
@@ -99,7 +99,7 @@
 
         .registration-container {
             background: var(--card-bg);
-            max-width: 650px; 
+            max-width: 650px;
             width: 100%;
             border-radius: 16px;
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
@@ -156,12 +156,12 @@
             border: 1px solid transparent;
         }
 
-        .cta-btn:hover { 
-            background: transparent; 
-            color: var(--primary); 
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--primary);
             border-color: var(--primary);
-            transform: translateY(-2px); 
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
         }
 
         /* Specifically styling the Night Ops hover state to be visible */
@@ -170,7 +170,7 @@
         .security-note { margin-top: 30px; font-size: 12px; color: var(--text-main); opacity: 0.7; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
         /* =========================================
-           RADAR GAME STYLES
+           SHARED GAME CARD STYLES
            ========================================= */
         .game-area {
             background: var(--bg-color);
@@ -212,6 +212,31 @@
 
         body.theme-night-ops .game-hud { color: var(--accent); }
 
+        .btn-small {
+            background: var(--accent); color: var(--card-bg); border: none; padding: 12px 35px;
+            font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700;
+            border-radius: 6px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
+        }
+        body.theme-night-ops .btn-small { color: black; }
+        .btn-small:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .btn-small:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .game-message { margin-top: 15px; font-weight: 600; font-size: 18px; color: var(--primary); font-family: 'Rajdhani', sans-serif; min-height: 24px; }
+        body.theme-night-ops .game-message { color: var(--accent); }
+
+        /* LEADERBOARD STYLES */
+        .leaderboard { margin-top: 35px; text-align: left; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto;}
+        .leaderboard h3 { font-family: 'Rajdhani', sans-serif; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 15px; color: var(--primary); transition: color 0.4s ease;}
+        body.theme-night-ops .leaderboard h3 { color: var(--accent); }
+        .rank-row { display: flex; justify-content: space-between; padding: 12px 10px; border-bottom: 1px solid var(--bg-color);}
+        .rank-row:nth-child(even) { background: var(--bg-color); }
+        .rank-email { font-weight: 500; color: var(--text-main); }
+        .rank-score { color: var(--primary); font-weight: 700; font-family: monospace; font-size: 16px;}
+        body.theme-night-ops .rank-score { color: var(--accent); }
+
+        /* =========================================
+           GAME 1: RADAR / SIGNAL INTERCEPT
+           ========================================= */
         .radar-screen {
             position: relative;
             width: 300px;
@@ -244,7 +269,7 @@
             transform-origin: bottom left;
             animation: sweep 2s linear infinite;
             border-right: 2px solid var(--radar-green);
-            display: none; 
+            display: none;
             opacity: 0.8;
         }
         @keyframes sweep { 100% { transform: rotate(360deg); } }
@@ -260,26 +285,120 @@
             100% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
         }
 
-        .btn-small {
-            background: var(--accent); color: var(--card-bg); border: none; padding: 12px 35px;
-            font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700;
-            border-radius: 6px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
+        /* =========================================
+           GAME 2: MORSE INTERCEPTOR
+           ========================================= */
+        .signal-lamp {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+            border: 4px solid var(--radar-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: box-shadow 0.08s ease, background 0.08s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        body.theme-night-ops .btn-small { color: black; }
-        .btn-small:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .signal-lamp.lit {
+            background: radial-gradient(circle, var(--radar-green) 0%, #063 100%);
+            box-shadow: 0 0 40px var(--radar-green), 0 0 70px var(--radar-green);
+        }
+        .signal-lamp-icon { width: 34px; height: 34px; opacity: 0.4; transition: opacity 0.08s ease; }
+        .signal-lamp.lit .signal-lamp-icon { opacity: 1; }
 
-        #gameMessage { margin-top: 15px; font-weight: 600; font-size: 18px; color: var(--primary); font-family: 'Rajdhani', sans-serif;}
-        body.theme-night-ops #gameMessage { color: var(--accent); }
+        .morse-transcript {
+            font-family: monospace;
+            font-size: 20px;
+            letter-spacing: 4px;
+            min-height: 28px;
+            color: var(--radar-green);
+            margin-bottom: 18px;
+        }
 
-        /* LEADERBOARD STYLES */
-        .leaderboard { margin-top: 35px; text-align: left; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto;}
-        .leaderboard h3 { font-family: 'Rajdhani', sans-serif; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 15px; color: var(--primary); transition: color 0.4s ease;}
-        body.theme-night-ops .leaderboard h3 { color: var(--accent); }
-        .rank-row { display: flex; justify-content: space-between; padding: 12px 10px; border-bottom: 1px solid var(--bg-color);}
-        .rank-row:nth-child(even) { background: var(--bg-color); }
-        .rank-email { font-weight: 500; color: var(--text-main); }
-        .rank-score { color: var(--primary); font-weight: 700; font-family: monospace; font-size: 16px;}
-        body.theme-night-ops .rank-score { color: var(--accent); }
+        .morse-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 340px;
+            margin-bottom: 10px;
+        }
+        .morse-option-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 17px;
+            letter-spacing: 1px;
+            padding: 14px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .morse-option-btn:hover:not(:disabled) { background: var(--accent); color: var(--card-bg); transform: translateY(-2px); }
+        .morse-option-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+        .morse-option-btn.correct-answer { background: var(--radar-green); border-color: var(--radar-green); color: white; }
+        .morse-option-btn.wrong-answer { background: var(--danger); border-color: var(--danger); color: white; }
+
+        .replay-link {
+            background: none;
+            border: none;
+            color: var(--primary);
+            text-decoration: underline;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+        body.theme-night-ops .replay-link { color: var(--accent); }
+
+        /* =========================================
+           GAME 3: CHECKPOINT RELAY (SEQUENCE MEMORY)
+           ========================================= */
+        .compass-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 70px);
+            grid-template-rows: repeat(3, 70px);
+            gap: 8px;
+            margin: 10px 0 20px 0;
+        }
+        .compass-btn {
+            grid-column: 2; /* default, overridden per-node below */
+            border-radius: 10px;
+            border: 2px solid var(--accent);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+        }
+        .compass-btn:disabled { cursor: not-allowed; }
+        #cpNorth { grid-column: 2; grid-row: 1; }
+        #cpWest  { grid-column: 1; grid-row: 2; }
+        #cpEast  { grid-column: 3; grid-row: 2; }
+        #cpSouth { grid-column: 2; grid-row: 3; }
+        .compass-center {
+            grid-column: 2; grid-row: 2;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Rajdhani', monospace; font-weight: 700; font-size: 22px;
+            color: var(--primary); transition: color 0.4s ease;
+        }
+        body.theme-night-ops .compass-center { color: var(--accent); }
+        .compass-btn.active {
+            background: var(--radar-green);
+            border-color: var(--radar-green);
+            color: white;
+            transform: scale(1.08);
+            box-shadow: 0 0 25px var(--radar-green);
+        }
 
         @media (max-width: 650px) {
             body { padding-top: 80px; }
@@ -290,6 +409,7 @@
             .gateway-body { padding: 40px 20px; }
             .cta-btn { font-size: 16px; }
             .radar-screen { width: 260px; height: 260px; }
+            .morse-options { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -318,24 +438,24 @@
         <div class="gateway-body">
             <h2>Welcome to the Registration Portal</h2>
             <p>To ensure secure handling of your logistical details, arrival/departure schedules, and required file attachments, please select your echelon to proceed.</p>
-            
+
             <!-- RANK/ECHELON BUTTONS -->
             <div class="rank-buttons">
                 <!-- Officer Form (Active) -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBKM9HzDL8IOlKR7FDWcEVAuX2Y7cmXL4jv9gMfZxd9ljAfQ/viewform?usp=publish-editor" class="cta-btn" target="_blank" rel="noopener noreferrer">
                     Officers Registration
                 </a>
-                
+
                 <!-- JCO Form Placeholder -->
                 <a href="#" class="cta-btn" target="_blank" rel="noopener noreferrer">
                     JCOs Registration
                 </a>
-                
+
                 <!-- NCO Form Placeholder -->
                 <a href="#" class="cta-btn" target="_blank" rel="noopener noreferrer">
                     NCOs Registration
                 </a>
-                
+
                 <!-- Civilian Form Placeholder -->
                 <a href="#" class="cta-btn" target="_blank" rel="noopener noreferrer">
                     Civilians Registration
@@ -349,10 +469,10 @@
         </div>
     </div>
 
-    <!-- SECTION 2: GRAPHICAL RADAR GAME & LEADERBOARD -->
+    <!-- SECTION 2: RADAR GAME - SIGNAL INTERCEPT -->
     <div class="registration-container">
         <div class="gateway-body" style="padding-top: 30px;">
-            <h2>Challenge: Signal Intercept</h2>
+            <h2>Challenge 1: Signal Intercept</h2>
             <p style="margin-bottom: 25px; font-size: 15px;">Tap the unauthorized signal pings before they fade. You have 20 seconds to intercept as many as possible to secure your rank on the live board!</p>
 
             <div class="game-area">
@@ -370,9 +490,9 @@
                     <div class="radar-ring"></div>
                     <div class="radar-sweep" id="radarSweep"></div>
                 </div>
-                
+
                 <button id="startBtn" class="btn-small">START SCAN</button>
-                <p id="gameMessage"></p>
+                <p id="gameMessage" class="game-message"></p>
             </div>
 
             <!-- LIVE LEADERBOARD -->
@@ -382,7 +502,86 @@
                     <div class="rank-row"><em>Loading secure data...</em></div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <!-- SECTION 3: MORSE INTERCEPTOR GAME -->
+    <div class="registration-container">
+        <div class="gateway-body" style="padding-top: 30px;">
+            <h2>Challenge 2: Morse Interceptor</h2>
+            <p style="margin-bottom: 25px; font-size: 15px;">A signal lamp flashes an intercepted transmission letter by letter. Read the dots and dashes and select the correct word before the clock runs out.</p>
+
+            <div class="game-area">
+                <div class="input-group">
+                    <input type="email" id="morsePlayerEmail" placeholder="Enter email to rank..." required>
+                </div>
+
+                <div class="game-hud">
+                    <span id="morseTimeDisplay">TIME: 30s</span>
+                    <span id="morseScoreDisplay">DECODED: 0</span>
+                </div>
+
+                <div class="signal-lamp" id="signalLamp">
+                    <svg class="signal-lamp-icon" viewBox="0 0 24 24" fill="none" stroke="var(--radar-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18h6"></path><path d="M10 22h4"></path>
+                        <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path>
+                    </svg>
+                </div>
+
+                <div class="morse-transcript" id="morseTranscript">&nbsp;</div>
+
+                <div class="morse-options" id="morseOptions"></div>
+
+                <button id="morseReplayBtn" class="replay-link" style="display:none;">Replay Signal</button>
+                <button id="morseStartBtn" class="btn-small">BEGIN INTERCEPT</button>
+                <p id="morseMessage" class="game-message"></p>
+            </div>
+
+            <!-- LIVE LEADERBOARD -->
+            <div class="leaderboard">
+                <h3>Top 5 Operators (Most Decoded)</h3>
+                <div id="morseLeaderboardList">
+                    <div class="rank-row"><em>Loading secure data...</em></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: CHECKPOINT RELAY GAME (SIMON-STYLE MEMORY) -->
+    <div class="registration-container">
+        <div class="gateway-body" style="padding-top: 30px;">
+            <h2>Challenge 3: Checkpoint Relay</h2>
+            <p style="margin-bottom: 25px; font-size: 15px;">HQ transmits a route through the compass checkpoints. Watch the sequence, then relay it back in the same order. Every round adds one more checkpoint — one wrong relay ends the mission.</p>
+
+            <div class="game-area">
+                <div class="input-group">
+                    <input type="email" id="cpPlayerEmail" placeholder="Enter email to rank..." required>
+                </div>
+
+                <div class="game-hud">
+                    <span id="cpRoundDisplay">ROUND: 0</span>
+                    <span id="cpStatusDisplay">STATUS: STANDBY</span>
+                </div>
+
+                <div class="compass-grid">
+                    <button class="compass-btn" id="cpNorth" disabled>N</button>
+                    <button class="compass-btn" id="cpWest" disabled>W</button>
+                    <div class="compass-center" id="cpCenter">HQ</div>
+                    <button class="compass-btn" id="cpEast" disabled>E</button>
+                    <button class="compass-btn" id="cpSouth" disabled>S</button>
+                </div>
+
+                <button id="cpStartBtn" class="btn-small">RELAY ROUTE</button>
+                <p id="cpMessage" class="game-message"></p>
+            </div>
+
+            <!-- LIVE LEADERBOARD -->
+            <div class="leaderboard">
+                <h3>Top 5 Operators (Longest Relay)</h3>
+                <div id="cpLeaderboardList">
+                    <div class="rank-row"><em>Loading secure data...</em></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -390,7 +589,7 @@
     <script>
         // --- THEME SWITCHER LOGIC ---
         const themeDropdown = document.getElementById('themeDropdown');
-        
+
         // Load saved theme or default
         const savedTheme = localStorage.getItem('reunionTheme') || 'theme-sky-blue';
         document.body.className = savedTheme;
@@ -406,6 +605,19 @@
         // --- PASTE YOUR NEW GOOGLE APPS SCRIPT WEB APP URL HERE ---
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA5R94vgaOzK292EuJLABDlGx8ol5jbcIFdS_-pV_GOG2I_kYcLlGJvKC0t0BSz9WxWA/exec";
 
+        /* =========================================================
+           NOTE ON LEADERBOARDS FOR THE 3 GAMES
+           The three games below each call the same Apps Script with
+           an extra "game" query parameter (signal / morse / checkpoint)
+           so their scores can be tracked separately. Your current
+           Apps Script only needs to store & filter by that "game"
+           value if you want fully separate boards - otherwise all
+           three games will read/write the same sheet/list.
+           ========================================================= */
+
+        // =========================================================
+        // GAME 1: SIGNAL INTERCEPT (radar tap game)
+        // =========================================================
         const radarScreen = document.getElementById('radarScreen');
         const radarSweep = document.getElementById('radarSweep');
         const startBtn = document.getElementById('startBtn');
@@ -421,13 +633,12 @@
         let spawnerInterval = null;
         let isPlaying = false;
 
-        // FETCH LEADERBOARD 
-        function loadLeaderboard(urlAction = "?action=getTop") {
+        function loadLeaderboard(urlAction = "?action=getTop&game=signal") {
             fetch(SCRIPT_URL + urlAction)
                 .then(response => response.json())
                 .then(data => {
                     leaderboardList.innerHTML = '';
-                    if(data.length === 0) {
+                    if (data.length === 0) {
                         leaderboardList.innerHTML = '<div class="rank-row">No records yet. Be the first!</div>';
                         return;
                     }
@@ -444,16 +655,13 @@
                     leaderboardList.innerHTML = '<div class="rank-row">Unable to load leaderboard.</div>';
                 });
         }
-
-        // Initialize Leaderboard on load
         loadLeaderboard();
 
-        // Target Spawner
         function spawnTarget() {
             if (!isPlaying) return;
             const target = document.createElement('div');
             target.classList.add('target-ping');
-            
+
             const randomX = Math.floor(Math.random() * 80) + 10;
             const randomY = Math.floor(Math.random() * 80) + 10;
             target.style.left = randomX + '%';
@@ -474,9 +682,8 @@
             setTimeout(() => { if (target.parentElement) target.remove(); }, 1200);
         }
 
-        // Start Game
         startBtn.addEventListener('click', () => {
-            if(!playerEmail.value.includes('@')) {
+            if (!playerEmail.value.includes('@')) {
                 alert("Please enter a valid email to track your score.");
                 return;
             }
@@ -488,7 +695,7 @@
             timeDisplay.innerText = `TIME: 20s`;
             gameMessage.innerText = "";
             startBtn.style.display = 'none';
-            playerEmail.disabled = true; 
+            playerEmail.disabled = true;
             radarSweep.style.display = 'block';
 
             document.querySelectorAll('.target-ping').forEach(el => el.remove());
@@ -501,28 +708,340 @@
             }, 1000);
         });
 
-        // End Game & Save Score
         function endGame() {
             isPlaying = false;
             clearInterval(gameInterval);
             clearInterval(spawnerInterval);
-            radarSweep.style.display = 'none'; 
+            radarSweep.style.display = 'none';
             startBtn.style.display = 'inline-block';
             startBtn.innerText = 'SCAN AGAIN';
             playerEmail.disabled = false;
-            
+
             document.querySelectorAll('.target-ping').forEach(el => el.remove());
 
             gameMessage.innerHTML = `SCAN COMPLETE. Intercepts: ${score}.<br><span style="color:#64748b; font-size: 14px;">Transmitting to HQ...</span>`;
 
-            // Save Score using GET request bypass
-            const saveUrl = SCRIPT_URL + "?action=save&email=" + encodeURIComponent(playerEmail.value) + "&score=" + score;
-            
-            // This fetch saves the score AND returns the updated leaderboard instantly
-            loadLeaderboard("?action=save&email=" + encodeURIComponent(playerEmail.value) + "&score=" + score);
-            
+            loadLeaderboard("?action=save&game=signal&email=" + encodeURIComponent(playerEmail.value) + "&score=" + score);
+
             setTimeout(() => {
                 gameMessage.innerHTML = `SCAN COMPLETE.<br>Total Intercepts: <span style="color:var(--danger)">${score}</span>`;
+            }, 1500);
+        }
+
+        // =========================================================
+        // GAME 2: MORSE INTERCEPTOR
+        // =========================================================
+        const MORSE = {
+            A: '.-', B: '-...', C: '-.-.', D: '-..', E: '.', H: '....',
+            I: '..', N: '-.', O: '---', Q: '--.-', R: '.-.', S: '...',
+            T: '-', U: '..-'
+        };
+        const MORSE_WORDS = ["SOS", "HQ", "UNIT", "BASE", "CODE", "RADIO"];
+        const DECOY_WORDS = ["ALPHA", "BRAVO", "DELTA", "ECHO", "FOXTROT", "GOLF"];
+
+        const signalLamp = document.getElementById('signalLamp');
+        const morseTranscript = document.getElementById('morseTranscript');
+        const morseOptions = document.getElementById('morseOptions');
+        const morseStartBtn = document.getElementById('morseStartBtn');
+        const morseReplayBtn = document.getElementById('morseReplayBtn');
+        const morseTimeDisplay = document.getElementById('morseTimeDisplay');
+        const morseScoreDisplay = document.getElementById('morseScoreDisplay');
+        const morseMessage = document.getElementById('morseMessage');
+        const morsePlayerEmail = document.getElementById('morsePlayerEmail');
+        const morseLeaderboardList = document.getElementById('morseLeaderboardList');
+
+        let morseScore = 0;
+        let morseTimeLeft = 30;
+        let morseTimerInterval = null;
+        let morseIsPlaying = false;
+        let morseCurrentWord = null;
+        let morseAcceptingAnswer = false;
+
+        function loadMorseLeaderboard(urlAction = "?action=getTop&game=morse") {
+            fetch(SCRIPT_URL + urlAction)
+                .then(response => response.json())
+                .then(data => {
+                    morseLeaderboardList.innerHTML = '';
+                    if (data.length === 0) {
+                        morseLeaderboardList.innerHTML = '<div class="rank-row">No records yet. Be the first!</div>';
+                        return;
+                    }
+                    data.forEach((entry, index) => {
+                        let row = document.createElement('div');
+                        row.className = 'rank-row';
+                        let maskedEmail = entry.email.split('@')[0] + '@***';
+                        row.innerHTML = `<span class="rank-email">${index + 1}. ${maskedEmail}</span>
+                                         <span class="rank-score">${entry.score} pts</span>`;
+                        morseLeaderboardList.appendChild(row);
+                    });
+                }).catch(err => {
+                    console.log(err);
+                    morseLeaderboardList.innerHTML = '<div class="rank-row">Unable to load leaderboard.</div>';
+                });
+        }
+        loadMorseLeaderboard();
+
+        function sleep(ms) { return new Promise(res => setTimeout(res, ms)); }
+
+        async function flashSymbol(symbol) {
+            signalLamp.classList.add('lit');
+            await sleep(symbol === '.' ? 180 : 500);
+            signalLamp.classList.remove('lit');
+            await sleep(180);
+        }
+
+        async function flashWord(word) {
+            morseTranscript.innerHTML = '&nbsp;';
+            for (const letter of word) {
+                const pattern = MORSE[letter];
+                if (!pattern) continue;
+                for (const symbol of pattern) {
+                    if (!morseIsPlaying) return;
+                    await flashSymbol(symbol);
+                }
+                morseTranscript.innerText = (morseTranscript.innerText.trim() + ' ' + pattern).trim();
+                await sleep(400);
+            }
+        }
+
+        function buildOptions(correctWord) {
+            const pool = DECOY_WORDS.concat(MORSE_WORDS.filter(w => w !== correctWord));
+            const shuffledDecoys = pool.sort(() => Math.random() - 0.5).slice(0, 3);
+            const options = shuffledDecoys.concat([correctWord]).sort(() => Math.random() - 0.5);
+
+            morseOptions.innerHTML = '';
+            options.forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = 'morse-option-btn';
+                btn.innerText = word;
+                btn.addEventListener('click', () => handleMorseAnswer(word, correctWord, btn));
+                morseOptions.appendChild(btn);
+            });
+        }
+
+        function handleMorseAnswer(chosen, correctWord, btnEl) {
+            if (!morseAcceptingAnswer || !morseIsPlaying) return;
+            morseAcceptingAnswer = false;
+            document.querySelectorAll('.morse-option-btn').forEach(b => b.disabled = true);
+
+            if (chosen === correctWord) {
+                btnEl.classList.add('correct-answer');
+                morseScore++;
+                morseScoreDisplay.innerText = `DECODED: ${morseScore}`;
+                morseMessage.innerText = 'Correct decode.';
+            } else {
+                btnEl.classList.add('wrong-answer');
+                morseMessage.innerText = `Missed it — that was "${correctWord}".`;
+            }
+
+            setTimeout(() => { if (morseIsPlaying) runMorseRound(); }, 900);
+        }
+
+        async function runMorseRound() {
+            if (!morseIsPlaying) return;
+            morseMessage.innerText = '';
+            morseAcceptingAnswer = false;
+            morseOptions.innerHTML = '';
+            morseReplayBtn.style.display = 'none';
+            morseCurrentWord = MORSE_WORDS[Math.floor(Math.random() * MORSE_WORDS.length)];
+
+            await flashWord(morseCurrentWord);
+            if (!morseIsPlaying) return;
+
+            buildOptions(morseCurrentWord);
+            morseAcceptingAnswer = true;
+            morseReplayBtn.style.display = 'inline-block';
+        }
+
+        morseReplayBtn.addEventListener('click', async () => {
+            if (!morseIsPlaying || !morseCurrentWord) return;
+            morseReplayBtn.style.display = 'none';
+            document.querySelectorAll('.morse-option-btn').forEach(b => b.disabled = true);
+            await flashWord(morseCurrentWord);
+            if (!morseIsPlaying) return;
+            document.querySelectorAll('.morse-option-btn').forEach(b => b.disabled = false);
+            morseReplayBtn.style.display = 'inline-block';
+        });
+
+        morseStartBtn.addEventListener('click', () => {
+            if (!morsePlayerEmail.value.includes('@')) {
+                alert("Please enter a valid email to track your score.");
+                return;
+            }
+
+            morseScore = 0;
+            morseTimeLeft = 30;
+            morseIsPlaying = true;
+            morseScoreDisplay.innerText = `DECODED: 0`;
+            morseTimeDisplay.innerText = `TIME: 30s`;
+            morseMessage.innerText = '';
+            morseStartBtn.style.display = 'none';
+            morsePlayerEmail.disabled = true;
+
+            morseTimerInterval = setInterval(() => {
+                morseTimeLeft--;
+                morseTimeDisplay.innerText = `TIME: ${morseTimeLeft}s`;
+                if (morseTimeLeft <= 0) endMorseGame();
+            }, 1000);
+
+            runMorseRound();
+        });
+
+        function endMorseGame() {
+            morseIsPlaying = false;
+            morseAcceptingAnswer = false;
+            clearInterval(morseTimerInterval);
+            signalLamp.classList.remove('lit');
+            morseOptions.innerHTML = '';
+            morseReplayBtn.style.display = 'none';
+            morseTranscript.innerHTML = '&nbsp;';
+            morseStartBtn.style.display = 'inline-block';
+            morseStartBtn.innerText = 'INTERCEPT AGAIN';
+            morsePlayerEmail.disabled = false;
+
+            morseMessage.innerHTML = `SIGNAL LOST. Decoded: ${morseScore}.<br><span style="color:#64748b; font-size: 14px;">Transmitting to HQ...</span>`;
+
+            loadMorseLeaderboard("?action=save&game=morse&email=" + encodeURIComponent(morsePlayerEmail.value) + "&score=" + morseScore);
+
+            setTimeout(() => {
+                morseMessage.innerHTML = `SIGNAL LOST.<br>Total Decoded: <span style="color:var(--danger)">${morseScore}</span>`;
+            }, 1500);
+        }
+
+        // =========================================================
+        // GAME 3: CHECKPOINT RELAY (Simon-style sequence memory)
+        // =========================================================
+        const cpDirections = ['N', 'E', 'S', 'W'];
+        const cpButtons = {
+            N: document.getElementById('cpNorth'),
+            E: document.getElementById('cpEast'),
+            S: document.getElementById('cpSouth'),
+            W: document.getElementById('cpWest')
+        };
+        const cpStartBtn = document.getElementById('cpStartBtn');
+        const cpRoundDisplay = document.getElementById('cpRoundDisplay');
+        const cpStatusDisplay = document.getElementById('cpStatusDisplay');
+        const cpMessage = document.getElementById('cpMessage');
+        const cpPlayerEmail = document.getElementById('cpPlayerEmail');
+        const cpLeaderboardList = document.getElementById('cpLeaderboardList');
+
+        let cpSequence = [];
+        let cpPlayerStep = 0;
+        let cpIsPlaying = false;
+        let cpAcceptingInput = false;
+
+        function loadCpLeaderboard(urlAction = "?action=getTop&game=checkpoint") {
+            fetch(SCRIPT_URL + urlAction)
+                .then(response => response.json())
+                .then(data => {
+                    cpLeaderboardList.innerHTML = '';
+                    if (data.length === 0) {
+                        cpLeaderboardList.innerHTML = '<div class="rank-row">No records yet. Be the first!</div>';
+                        return;
+                    }
+                    data.forEach((entry, index) => {
+                        let row = document.createElement('div');
+                        row.className = 'rank-row';
+                        let maskedEmail = entry.email.split('@')[0] + '@***';
+                        row.innerHTML = `<span class="rank-email">${index + 1}. ${maskedEmail}</span>
+                                         <span class="rank-score">Round ${entry.score}</span>`;
+                        cpLeaderboardList.appendChild(row);
+                    });
+                }).catch(err => {
+                    console.log(err);
+                    cpLeaderboardList.innerHTML = '<div class="rank-row">Unable to load leaderboard.</div>';
+                });
+        }
+        loadCpLeaderboard();
+
+        function setCpButtonsEnabled(enabled) {
+            Object.values(cpButtons).forEach(btn => btn.disabled = !enabled);
+        }
+
+        async function flashCpNode(dir) {
+            const btn = cpButtons[dir];
+            btn.classList.add('active');
+            await sleep(420);
+            btn.classList.remove('active');
+            await sleep(180);
+        }
+
+        async function playCpSequence() {
+            cpAcceptingInput = false;
+            setCpButtonsEnabled(false);
+            cpStatusDisplay.innerText = 'STATUS: WATCH';
+            await sleep(500);
+            for (const dir of cpSequence) {
+                if (!cpIsPlaying) return;
+                await flashCpNode(dir);
+            }
+            if (!cpIsPlaying) return;
+            cpPlayerStep = 0;
+            cpAcceptingInput = true;
+            cpStatusDisplay.innerText = 'STATUS: YOUR RELAY';
+            setCpButtonsEnabled(true);
+        }
+
+        function addCpRound() {
+            cpSequence.push(cpDirections[Math.floor(Math.random() * cpDirections.length)]);
+            cpRoundDisplay.innerText = `ROUND: ${cpSequence.length}`;
+            playCpSequence();
+        }
+
+        function handleCpInput(dir) {
+            if (!cpAcceptingInput || !cpIsPlaying) return;
+            flashCpNode(dir);
+
+            if (dir === cpSequence[cpPlayerStep]) {
+                cpPlayerStep++;
+                if (cpPlayerStep === cpSequence.length) {
+                    cpAcceptingInput = false;
+                    setCpButtonsEnabled(false);
+                    cpMessage.innerText = 'Checkpoint reached. Next route incoming...';
+                    setTimeout(() => { if (cpIsPlaying) addCpRound(); }, 900);
+                }
+            } else {
+                endCpGame();
+            }
+        }
+
+        Object.entries(cpButtons).forEach(([dir, btn]) => {
+            btn.addEventListener('click', () => handleCpInput(dir));
+        });
+
+        cpStartBtn.addEventListener('click', () => {
+            if (!cpPlayerEmail.value.includes('@')) {
+                alert("Please enter a valid email to track your score.");
+                return;
+            }
+
+            cpSequence = [];
+            cpPlayerStep = 0;
+            cpIsPlaying = true;
+            cpMessage.innerText = '';
+            cpStartBtn.style.display = 'none';
+            cpPlayerEmail.disabled = true;
+            cpRoundDisplay.innerText = 'ROUND: 0';
+
+            addCpRound();
+        });
+
+        function endCpGame() {
+            const finalRound = cpSequence.length > 0 ? cpSequence.length - 1 : 0;
+            cpIsPlaying = false;
+            cpAcceptingInput = false;
+            setCpButtonsEnabled(false);
+            cpStatusDisplay.innerText = 'STATUS: MISSION FAILED';
+            cpStartBtn.style.display = 'inline-block';
+            cpStartBtn.innerText = 'RELAY AGAIN';
+            cpPlayerEmail.disabled = false;
+
+            cpMessage.innerHTML = `ROUTE BROKEN. Reached round ${finalRound + 1}.<br><span style="color:#64748b; font-size: 14px;">Transmitting to HQ...</span>`;
+
+            loadCpLeaderboard("?action=save&game=checkpoint&email=" + encodeURIComponent(cpPlayerEmail.value) + "&score=" + (finalRound + 1));
+
+            setTimeout(() => {
+                cpMessage.innerHTML = `ROUTE BROKEN.<br>Best Round: <span style="color:var(--danger)">${finalRound + 1}</span>`;
             }, 1500);
         }
     </script>
