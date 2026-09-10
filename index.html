@@ -9,16 +9,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
+        /* =========================================
+           DYNAMIC THEME VARIABLES
+           ========================================= */
         :root {
-            --primary: #0f172a; 
-            --accent: #d4af37; 
-            --bg-color: #f1f5f9;
+            /* DEFAULT: Modern Sky Deep Blue */
+            --primary: #0c4a6e; 
+            --accent: #38bdf8; 
+            --bg-color: #f0f9ff;
             --card-bg: #ffffff;
-            --text-main: #334155;
+            --text-main: #0f172a;
+            --radar-green: #0ea5e9;
+            --danger: #ef4444;
+        }
+
+        body.theme-tactical {
+            --primary: #2c3e2d; 
+            --accent: #d4af37; 
+            --bg-color: #e8ede7;
+            --card-bg: #ffffff;
+            --text-main: #2d372c;
             --radar-green: #10b981;
             --danger: #ef4444;
         }
 
+        body.theme-night-ops {
+            --primary: #000000; 
+            --accent: #39ff14; 
+            --bg-color: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-main: #e2e8f0;
+            --radar-green: #39ff14;
+            --danger: #ff003c;
+        }
+
+        body.theme-desert {
+            --primary: #5c4a3d; 
+            --accent: #d97706; 
+            --bg-color: #f4ecd8;
+            --card-bg: #ffffff;
+            --text-main: #3d3126;
+            --radar-green: #b45309;
+            --danger: #dc2626;
+        }
+
+        /* =========================================
+           BASE STYLING
+           ========================================= */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
@@ -30,19 +67,46 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
-            background-image: radial-gradient(circle at top right, #e2e8f0 0%, #f1f5f9 100%);
+            padding: 60px 20px 40px 20px; /* Extra top padding for theme menu */
+            background-image: radial-gradient(circle at top right, rgba(255,255,255,0.2) 0%, transparent 100%);
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
+
+        /* THEME SELECTOR */
+        .theme-control {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .theme-control select {
+            padding: 8px 15px;
+            border-radius: 30px;
+            border: 2px solid var(--accent);
+            background: var(--primary);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .theme-control select:hover { background: var(--card-bg); color: var(--primary); }
 
         .registration-container {
             background: var(--card-bg);
             max-width: 650px; 
             width: 100%;
             border-radius: 16px;
-            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.1);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             text-align: center;
-            margin-bottom: 30px; 
+            margin-bottom: 30px;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
         }
 
         .header {
@@ -53,57 +117,84 @@
             align-items: center;
             justify-content: center;
             border-bottom: 4px solid var(--accent);
+            transition: background 0.4s ease;
         }
 
         .custom-logo { max-height: 70px; width: auto; margin-right: 25px; object-fit: contain; flex-shrink: 0; }
         .header-text { text-align: left; }
         .header-text h1 { font-family: 'Rajdhani', sans-serif; font-size: 30px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-        .header-text p { color: #94a3b8; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+        .header-text p { color: rgba(255,255,255,0.8); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
 
         .gateway-body { padding: 40px 40px; }
-        .gateway-body h2 { font-family: 'Rajdhani', sans-serif; color: var(--primary); font-size: 26px; margin-bottom: 15px; }
-        .gateway-body p { font-size: 16px; line-height: 1.6; margin-bottom: 35px; color: var(--text-main); }
+        .gateway-body h2 { font-family: 'Rajdhani', sans-serif; color: var(--primary); font-size: 26px; margin-bottom: 15px; transition: color 0.4s ease; }
+        .gateway-body p { font-size: 16px; line-height: 1.6; margin-bottom: 30px; color: var(--text-main); }
+
+        /* MULTIPLE REGISTRATION BUTTONS */
+        .rank-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
 
         .cta-btn {
             display: inline-block;
             background: var(--primary);
             color: white;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 8px;
-            padding: 18px 40px;
+            padding: 16px 20px;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid transparent;
         }
-        .cta-btn:hover { background: #1e293b; transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(15, 23, 42, 0.4); color: var(--accent); }
 
-        .security-note { margin-top: 30px; font-size: 12px; color: #94a3b8; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .cta-btn:hover { 
+            background: transparent; 
+            color: var(--primary); 
+            border-color: var(--primary);
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); 
+        }
 
-        /* RADAR GAME STYLES */
+        /* Specifically styling the Night Ops hover state to be visible */
+        body.theme-night-ops .cta-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+        .security-note { margin-top: 30px; font-size: 12px; color: var(--text-main); opacity: 0.7; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+        /* =========================================
+           RADAR GAME STYLES
+           ========================================= */
         .game-area {
-            background: #f8fafc;
-            border: 2px dashed #cbd5e1;
+            background: var(--bg-color);
+            border: 2px dashed var(--accent);
             border-radius: 12px;
             padding: 30px;
             margin-top: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: background 0.4s ease, border-color 0.4s ease;
         }
 
         .input-group { margin-bottom: 20px; width: 100%; max-width: 320px; }
         .input-group input {
             padding: 12px;
             width: 100%;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--accent);
             border-radius: 6px;
             font-family: inherit;
             font-size: 16px;
             text-align: center;
+            background: var(--card-bg);
+            color: var(--text-main);
         }
 
         .game-hud {
@@ -116,40 +207,45 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 15px;
+            transition: color 0.4s ease;
         }
+
+        body.theme-night-ops .game-hud { color: var(--accent); }
 
         .radar-screen {
             position: relative;
             width: 300px;
             height: 300px;
             border-radius: 50%;
-            background: radial-gradient(circle, #022a1c 0%, #00150b 100%);
+            background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
             border: 4px solid var(--radar-green);
             overflow: hidden;
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.4) inset, 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 25px var(--radar-green) inset, 0 10px 20px rgba(0,0,0,0.2);
             margin-bottom: 20px;
             user-select: none;
             touch-action: manipulation;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .radar-grid {
             position: absolute; top: 50%; left: 50%; width: 100%; height: 100%;
-            transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(16, 185, 129, 0.3);
+            transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid var(--radar-green); opacity: 0.3;
         }
-        .radar-grid::before { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgba(16, 185, 129, 0.4); }
-        .radar-grid::after { content: ''; position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: rgba(16, 185, 129, 0.4); }
+        .radar-grid::before { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: var(--radar-green); }
+        .radar-grid::after { content: ''; position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: var(--radar-green); }
         .radar-ring {
             position: absolute; top: 25%; left: 25%; width: 50%; height: 50%;
-            border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 50%;
+            border: 1px solid var(--radar-green); border-radius: 50%; opacity: 0.4;
         }
 
         .radar-sweep {
             position: absolute; top: 0; left: 50%; width: 50%; height: 50%;
-            background: conic-gradient(from 90deg, rgba(16,185,129,0) 0%, rgba(16,185,129,0.1) 80%, rgba(16,185,129,0.8) 100%);
+            background: conic-gradient(from 90deg, transparent 0%, transparent 80%, var(--radar-green) 100%);
             transform-origin: bottom left;
             animation: sweep 2s linear infinite;
             border-right: 2px solid var(--radar-green);
             display: none; 
+            opacity: 0.8;
         }
         @keyframes sweep { 100% { transform: rotate(360deg); } }
 
@@ -165,33 +261,49 @@
         }
 
         .btn-small {
-            background: var(--accent); color: var(--primary); border: none; padding: 12px 35px;
+            background: var(--accent); color: var(--card-bg); border: none; padding: 12px 35px;
             font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700;
-            border-radius: 6px; cursor: pointer; transition: transform 0.2s; text-transform: uppercase;
+            border-radius: 6px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
         }
-        .btn-small:hover { transform: scale(1.05); }
+        body.theme-night-ops .btn-small { color: black; }
+        .btn-small:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
         #gameMessage { margin-top: 15px; font-weight: 600; font-size: 18px; color: var(--primary); font-family: 'Rajdhani', sans-serif;}
+        body.theme-night-ops #gameMessage { color: var(--accent); }
 
         /* LEADERBOARD STYLES */
         .leaderboard { margin-top: 35px; text-align: left; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto;}
-        .leaderboard h3 { font-family: 'Rajdhani', sans-serif; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 15px; color: var(--primary);}
-        .rank-row { display: flex; justify-content: space-between; padding: 12px 10px; border-bottom: 1px solid #e2e8f0;}
-        .rank-row:nth-child(even) { background: #f8fafc; }
+        .leaderboard h3 { font-family: 'Rajdhani', sans-serif; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 15px; color: var(--primary); transition: color 0.4s ease;}
+        body.theme-night-ops .leaderboard h3 { color: var(--accent); }
+        .rank-row { display: flex; justify-content: space-between; padding: 12px 10px; border-bottom: 1px solid var(--bg-color);}
+        .rank-row:nth-child(even) { background: var(--bg-color); }
         .rank-email { font-weight: 500; color: var(--text-main); }
         .rank-score { color: var(--primary); font-weight: 700; font-family: monospace; font-size: 16px;}
+        body.theme-night-ops .rank-score { color: var(--accent); }
 
         @media (max-width: 650px) {
+            body { padding-top: 80px; }
+            .theme-control { top: 15px; right: 15px; }
             .header { flex-direction: column; text-align: center; }
             .custom-logo { margin-right: 0; margin-bottom: 15px; }
             .header-text { text-align: center; }
             .gateway-body { padding: 40px 20px; }
-            .cta-btn { padding: 15px 25px; font-size: 18px; width: 100%; }
+            .cta-btn { font-size: 16px; }
             .radar-screen { width: 260px; height: 260px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- THEME SWITCHER -->
+    <div class="theme-control">
+        <select id="themeDropdown">
+            <option value="theme-sky-blue">Sky Deep Blue</option>
+            <option value="theme-tactical">Tactical Olive</option>
+            <option value="theme-night-ops">Night Ops</option>
+            <option value="theme-desert">Desert Strike</option>
+        </select>
+    </div>
 
     <!-- SECTION 1: REGISTRATION GATEWAY -->
     <div class="registration-container">
@@ -205,11 +317,30 @@
 
         <div class="gateway-body">
             <h2>Welcome to the Registration Portal</h2>
-            <p>To ensure secure handling of your logistical details, arrival/departure schedules, and required file attachments, please proceed to the encrypted Google Registration Form below.</p>
+            <p>To ensure secure handling of your logistical details, arrival/departure schedules, and required file attachments, please select your echelon to proceed.</p>
             
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBKM9HzDL8IOlKR7FDWcEVAuX2Y7cmXL4jv9gMfZxd9ljAfQ/viewform?usp=publish-editor" class="cta-btn" target="_blank" rel="noopener noreferrer">
-                Proceed to Secure Form
-            </a>
+            <!-- RANK/ECHELON BUTTONS -->
+            <div class="rank-buttons">
+                <!-- Officer Form (Active) -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBKM9HzDL8IOlKR7FDWcEVAuX2Y7cmXL4jv9gMfZxd9ljAfQ/viewform?usp=publish-editor" class="cta-btn" target="_blank" rel="noopener noreferrer">
+                    Officers Registration
+                </a>
+                
+                <!-- JCO Form Placeholder -->
+                <a href="#" class="cta-btn" target="_blank" rel="noopener noreferrer">
+                    JCOs Registration
+                </a>
+                
+                <!-- NCO Form Placeholder -->
+                <a href="#" class="cta-btn" target="_blank" rel="noopener noreferrer">
+                    NCOs Registration
+                </a>
+                
+                <!-- Civilian Form Placeholder -->
+                <a href="#" class="cta-btn" target="_blank" rel="noopener noreferrer">
+                    Civilians Registration
+                </a>
+            </div>
 
             <div class="security-note">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -225,7 +356,6 @@
             <p style="margin-bottom: 25px; font-size: 15px;">Tap the unauthorized signal pings before they fade. You have 20 seconds to intercept as many as possible to secure your rank on the live board!</p>
 
             <div class="game-area">
-                
                 <div class="input-group">
                     <input type="email" id="playerEmail" placeholder="Enter email to rank..." required>
                 </div>
@@ -243,7 +373,6 @@
                 
                 <button id="startBtn" class="btn-small">START SCAN</button>
                 <p id="gameMessage"></p>
-
             </div>
 
             <!-- LIVE LEADERBOARD -->
@@ -259,6 +388,21 @@
 
     <!-- SCRIPT LOGIC -->
     <script>
+        // --- THEME SWITCHER LOGIC ---
+        const themeDropdown = document.getElementById('themeDropdown');
+        
+        // Load saved theme or default
+        const savedTheme = localStorage.getItem('reunionTheme') || 'theme-sky-blue';
+        document.body.className = savedTheme;
+        themeDropdown.value = savedTheme;
+
+        // Change theme dynamically
+        themeDropdown.addEventListener('change', (e) => {
+            const newTheme = e.target.value;
+            document.body.className = newTheme;
+            localStorage.setItem('reunionTheme', newTheme);
+        });
+
         // --- PASTE YOUR NEW GOOGLE APPS SCRIPT WEB APP URL HERE ---
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA5R94vgaOzK292EuJLABDlGx8ol5jbcIFdS_-pV_GOG2I_kYcLlGJvKC0t0BSz9WxWA/exec";
 
@@ -277,7 +421,7 @@
         let spawnerInterval = null;
         let isPlaying = false;
 
-        // FETCH LEADERBOARD (Using GET request to avoid CORS block)
+        // FETCH LEADERBOARD 
         function loadLeaderboard(urlAction = "?action=getTop") {
             fetch(SCRIPT_URL + urlAction)
                 .then(response => response.json())
@@ -344,7 +488,7 @@
             timeDisplay.innerText = `TIME: 20s`;
             gameMessage.innerText = "";
             startBtn.style.display = 'none';
-            playerEmail.disabled = true; // Lock email input during game
+            playerEmail.disabled = true; 
             radarSweep.style.display = 'block';
 
             document.querySelectorAll('.target-ping').forEach(el => el.remove());
