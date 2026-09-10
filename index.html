@@ -655,7 +655,8 @@
         let isPlaying = false;
 
         function loadLeaderboard(urlAction = "?action=getTop&game=signal") {
-            fetch(SCRIPT_URL + urlAction)
+            // CACHE BUSTING: Added "+ '&t=' + Date.now()" to prevent browser from loading stale data
+            fetch(SCRIPT_URL + urlAction + "&t=" + Date.now())
                 .then(response => response.json())
                 .then(data => {
                     leaderboardList.innerHTML = '';
@@ -779,7 +780,8 @@
         let morseAcceptingAnswer = false;
 
         function loadMorseLeaderboard(urlAction = "?action=getTop&game=morse") {
-            fetch(SCRIPT_URL + urlAction)
+            // CACHE BUSTING: Added "+ '&t=' + Date.now()" to prevent browser from loading stale data
+            fetch(SCRIPT_URL + urlAction + "&t=" + Date.now())
                 .then(response => response.json())
                 .then(data => {
                     morseLeaderboardList.innerHTML = '';
@@ -955,7 +957,8 @@
         let cpWindowMsLeft = 0;
 
         function loadCpLeaderboard(urlAction = "?action=getTop&game=checkpoint") {
-            fetch(SCRIPT_URL + urlAction)
+            // CACHE BUSTING: Added "+ '&t=' + Date.now()" to prevent browser from loading stale data
+            fetch(SCRIPT_URL + urlAction + "&t=" + Date.now())
                 .then(response => response.json())
                 .then(data => {
                     cpLeaderboardList.innerHTML = '';
