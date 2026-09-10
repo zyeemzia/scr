@@ -617,14 +617,23 @@
         // --- PASTE YOUR NEW GOOGLE APPS SCRIPT WEB APP URL HERE ---
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA5R94vgaOzK292EuJLABDlGx8ol5jbcIFdS_-pV_GOG2I_kYcLlGJvKC0t0BSz9WxWA/exec";
 
+        // Trims stray spaces and lowercases the address so
+        // "Coy@Gmail.com" and " coy@gmail.com " are treated as the
+        // same player by the backend instead of creating duplicates.
+        function normalizeEmail(raw) {
+            return raw.trim().toLowerCase();
+        }
+
         /* =========================================================
            NOTE ON LEADERBOARDS FOR THE 3 GAMES
-           The three games below each call the same Apps Script with
-           an extra "game" query parameter (signal / morse / checkpoint)
-           so their scores can be tracked separately. Your current
-           Apps Script only needs to store & filter by that "game"
-           value if you want fully separate boards - otherwise all
-           three games will read/write the same sheet/list.
+           Each game calls the same Apps Script with a "game" query
+           parameter (signal / morse / checkpoint). The Apps Script
+           itself (see the accompanying leaderboard-backend.gs file)
+           is what filters scores per game and keeps ONE row per
+           email per game, only overwriting it when a new score is
+           higher - that's what stops repeat players from showing up
+           multiple times and stops one game's scores appearing on
+           another game's board.
            ========================================================= */
 
         // =========================================================
@@ -733,7 +742,7 @@
 
             gameMessage.innerHTML = `SCAN COMPLETE. Intercepts: ${score}.<br><span style="color:#64748b; font-size: 14px;">Transmitting to HQ...</span>`;
 
-            loadLeaderboard("?action=save&game=signal&email=" + encodeURIComponent(playerEmail.value) + "&score=" + score);
+            loadLeaderboard("?action=save&game=signal&email=" + encodeURIComponent(normalizeEmail(playerEmail.value)) + "&score=" + score);
 
             setTimeout(() => {
                 gameMessage.innerHTML = `SCAN COMPLETE.<br>Total Intercepts: <span style="color:var(--danger)">${score}</span>`;
@@ -913,7 +922,7 @@
 
             morseMessage.innerHTML = `SIGNAL LOST. Decoded: ${morseScore}.<br><span style="color:#64748b; font-size: 14px;">Transmitting to HQ...</span>`;
 
-            loadMorseLeaderboard("?action=save&game=morse&email=" + encodeURIComponent(morsePlayerEmail.value) + "&score=" + morseScore);
+            loadMorseLeaderboard("?action=save&game=morse&email=" + encodeURIComponent(normalizeEmail(morsePlayerEmail.value)) + "&score=" + morseScore);
 
             setTimeout(() => {
                 morseMessage.innerHTML = `SIGNAL LOST.<br>Total Decoded: <span style="color:var(--danger)">${morseScore}</span>`;
@@ -1089,7 +1098,7 @@
 
             cpMessage.innerHTML = `ROUTE BROKEN. Reached round ${finalRound + 1}.<br><span style="color:#64748b; font-size: 14px;">Transmitting to HQ...</span>`;
 
-            loadCpLeaderboard("?action=save&game=checkpoint&email=" + encodeURIComponent(cpPlayerEmail.value) + "&score=" + (finalRound + 1));
+            loadCpLeaderboard("?action=save&game=checkpoint&email=" + encodeURIComponent(normalizeEmail(cpPlayerEmail.value)) + "&score=" + (finalRound + 1));
 
             setTimeout(() => {
                 cpMessage.innerHTML = `ROUTE BROKEN.<br>Best Round: <span style="color:var(--danger)">${finalRound + 1}</span>`;
