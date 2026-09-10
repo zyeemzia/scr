@@ -400,6 +400,17 @@
             box-shadow: 0 0 25px var(--radar-green);
         }
 
+        .cp-window {
+            font-family: 'Rajdhani', monospace;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--radar-green);
+            margin-top: -8px;
+            margin-bottom: 14px;
+            min-height: 18px;
+        }
+
         @media (max-width: 650px) {
             body { padding-top: 80px; }
             .theme-control { top: 15px; right: 15px; }
@@ -469,47 +480,11 @@
         </div>
     </div>
 
-    <!-- SECTION 2: RADAR GAME - SIGNAL INTERCEPT -->
+    <!-- SECTION 2: MORSE INTERCEPTOR GAME -->
     <div class="registration-container">
         <div class="gateway-body" style="padding-top: 30px;">
-            <h2>Challenge 1: Signal Intercept</h2>
-            <p style="margin-bottom: 25px; font-size: 15px;">Tap the unauthorized signal pings before they fade. You have 20 seconds to intercept as many as possible to secure your rank on the live board!</p>
-
-            <div class="game-area">
-                <div class="input-group">
-                    <input type="email" id="playerEmail" placeholder="Enter email to rank..." required>
-                </div>
-
-                <div class="game-hud">
-                    <span id="timeDisplay">TIME: 20s</span>
-                    <span id="scoreDisplay">INTERCEPTS: 0</span>
-                </div>
-
-                <div class="radar-screen" id="radarScreen">
-                    <div class="radar-grid"></div>
-                    <div class="radar-ring"></div>
-                    <div class="radar-sweep" id="radarSweep"></div>
-                </div>
-
-                <button id="startBtn" class="btn-small">START SCAN</button>
-                <p id="gameMessage" class="game-message"></p>
-            </div>
-
-            <!-- LIVE LEADERBOARD -->
-            <div class="leaderboard">
-                <h3>Top 5 Operators (Highest Intercepts)</h3>
-                <div id="leaderboardList">
-                    <div class="rank-row"><em>Loading secure data...</em></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECTION 3: MORSE INTERCEPTOR GAME -->
-    <div class="registration-container">
-        <div class="gateway-body" style="padding-top: 30px;">
-            <h2>Challenge 2: Morse Interceptor</h2>
-            <p style="margin-bottom: 25px; font-size: 15px;">A signal lamp flashes an intercepted transmission letter by letter. Read the dots and dashes and select the correct word before the clock runs out.</p>
+            <h2>Challenge 1: Morse Interceptor</h2>
+            <p style="margin-bottom: 25px; font-size: 15px;">A signal lamp flashes an intercepted transmission letter by letter. Read the dots and dashes and select the correct word before the clock runs out. 45 seconds on the clock — more rounds means more room to separate the sharp operators from the rest.</p>
 
             <div class="game-area">
                 <div class="input-group">
@@ -517,7 +492,7 @@
                 </div>
 
                 <div class="game-hud">
-                    <span id="morseTimeDisplay">TIME: 30s</span>
+                    <span id="morseTimeDisplay">TIME: 45s</span>
                     <span id="morseScoreDisplay">DECODED: 0</span>
                 </div>
 
@@ -547,11 +522,11 @@
         </div>
     </div>
 
-    <!-- SECTION 4: CHECKPOINT RELAY GAME (SIMON-STYLE MEMORY) -->
+    <!-- SECTION 3: CHECKPOINT RELAY GAME (SIMON-STYLE MEMORY) -->
     <div class="registration-container">
         <div class="gateway-body" style="padding-top: 30px;">
-            <h2>Challenge 3: Checkpoint Relay</h2>
-            <p style="margin-bottom: 25px; font-size: 15px;">HQ transmits a route through the compass checkpoints. Watch the sequence, then relay it back in the same order. Every round adds one more checkpoint — one wrong relay ends the mission.</p>
+            <h2>Challenge 2: Checkpoint Relay</h2>
+            <p style="margin-bottom: 25px; font-size: 15px;">HQ transmits a route through the compass checkpoints. Watch the sequence, then relay it back in the same order before the relay window closes. Every round adds one more checkpoint and tightens the window — one wrong tap or a stalled relay ends the mission.</p>
 
             <div class="game-area">
                 <div class="input-group">
@@ -562,6 +537,7 @@
                     <span id="cpRoundDisplay">ROUND: 0</span>
                     <span id="cpStatusDisplay">STATUS: STANDBY</span>
                 </div>
+                <div class="cp-window" id="cpWindowDisplay">&nbsp;</div>
 
                 <div class="compass-grid">
                     <button class="compass-btn" id="cpNorth" disabled>N</button>
@@ -579,6 +555,42 @@
             <div class="leaderboard">
                 <h3>Top 5 Operators (Longest Relay)</h3>
                 <div id="cpLeaderboardList">
+                    <div class="rank-row"><em>Loading secure data...</em></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: RADAR GAME - SIGNAL INTERCEPT -->
+    <div class="registration-container">
+        <div class="gateway-body" style="padding-top: 30px;">
+            <h2>Challenge 3: Signal Intercept</h2>
+            <p style="margin-bottom: 25px; font-size: 15px;">Tap the unauthorized signal pings before they fade. You have 20 seconds to intercept as many as possible to secure your rank on the live board!</p>
+
+            <div class="game-area">
+                <div class="input-group">
+                    <input type="email" id="playerEmail" placeholder="Enter email to rank..." required>
+                </div>
+
+                <div class="game-hud">
+                    <span id="timeDisplay">TIME: 20s</span>
+                    <span id="scoreDisplay">INTERCEPTS: 0</span>
+                </div>
+
+                <div class="radar-screen" id="radarScreen">
+                    <div class="radar-grid"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-sweep" id="radarSweep"></div>
+                </div>
+
+                <button id="startBtn" class="btn-small">START SCAN</button>
+                <p id="gameMessage" class="game-message"></p>
+            </div>
+
+            <!-- LIVE LEADERBOARD -->
+            <div class="leaderboard">
+                <h3>Top 5 Operators (Highest Intercepts)</h3>
+                <div id="leaderboardList">
                     <div class="rank-row"><em>Loading secure data...</em></div>
                 </div>
             </div>
@@ -751,7 +763,7 @@
         const morseLeaderboardList = document.getElementById('morseLeaderboardList');
 
         let morseScore = 0;
-        let morseTimeLeft = 30;
+        let morseTimeLeft = 45;
         let morseTimerInterval = null;
         let morseIsPlaying = false;
         let morseCurrentWord = null;
@@ -870,10 +882,10 @@
             }
 
             morseScore = 0;
-            morseTimeLeft = 30;
+            morseTimeLeft = 45;
             morseIsPlaying = true;
             morseScoreDisplay.innerText = `DECODED: 0`;
-            morseTimeDisplay.innerText = `TIME: 30s`;
+            morseTimeDisplay.innerText = `TIME: 45s`;
             morseMessage.innerText = '';
             morseStartBtn.style.display = 'none';
             morsePlayerEmail.disabled = true;
@@ -921,6 +933,7 @@
         const cpStartBtn = document.getElementById('cpStartBtn');
         const cpRoundDisplay = document.getElementById('cpRoundDisplay');
         const cpStatusDisplay = document.getElementById('cpStatusDisplay');
+        const cpWindowDisplay = document.getElementById('cpWindowDisplay');
         const cpMessage = document.getElementById('cpMessage');
         const cpPlayerEmail = document.getElementById('cpPlayerEmail');
         const cpLeaderboardList = document.getElementById('cpLeaderboardList');
@@ -929,6 +942,8 @@
         let cpPlayerStep = 0;
         let cpIsPlaying = false;
         let cpAcceptingInput = false;
+        let cpWindowInterval = null;
+        let cpWindowMsLeft = 0;
 
         function loadCpLeaderboard(urlAction = "?action=getTop&game=checkpoint") {
             fetch(SCRIPT_URL + urlAction)
@@ -966,9 +981,41 @@
             await sleep(180);
         }
 
+        // The relay window is the total time allowed to tap back the whole
+        // sequence. It grows with the sequence length (longer routes need
+        // more time overall) but the per-checkpoint allowance shrinks each
+        // round, so late rounds demand faster, cleaner relays. That spreads
+        // scores out instead of letting most players cap out at the same
+        // round.
+        function getRelayWindowMs(round) {
+            const perStepMs = Math.max(650, 1500 - (round - 1) * 45);
+            return round * perStepMs + 900;
+        }
+
+        function clearCpWindow() {
+            clearInterval(cpWindowInterval);
+            cpWindowInterval = null;
+            cpWindowDisplay.innerHTML = '&nbsp;';
+        }
+
+        function startCpWindow(ms) {
+            cpWindowMsLeft = ms;
+            cpWindowDisplay.innerText = `RELAY WINDOW: ${(cpWindowMsLeft / 1000).toFixed(1)}s`;
+            cpWindowInterval = setInterval(() => {
+                cpWindowMsLeft -= 100;
+                if (cpWindowMsLeft <= 0) {
+                    clearCpWindow();
+                    if (cpAcceptingInput) endCpGame('OUT OF TIME');
+                    return;
+                }
+                cpWindowDisplay.innerText = `RELAY WINDOW: ${(cpWindowMsLeft / 1000).toFixed(1)}s`;
+            }, 100);
+        }
+
         async function playCpSequence() {
             cpAcceptingInput = false;
             setCpButtonsEnabled(false);
+            clearCpWindow();
             cpStatusDisplay.innerText = 'STATUS: WATCH';
             await sleep(500);
             for (const dir of cpSequence) {
@@ -980,6 +1027,7 @@
             cpAcceptingInput = true;
             cpStatusDisplay.innerText = 'STATUS: YOUR RELAY';
             setCpButtonsEnabled(true);
+            startCpWindow(getRelayWindowMs(cpSequence.length));
         }
 
         function addCpRound() {
@@ -997,11 +1045,12 @@
                 if (cpPlayerStep === cpSequence.length) {
                     cpAcceptingInput = false;
                     setCpButtonsEnabled(false);
+                    clearCpWindow();
                     cpMessage.innerText = 'Checkpoint reached. Next route incoming...';
                     setTimeout(() => { if (cpIsPlaying) addCpRound(); }, 900);
                 }
             } else {
-                endCpGame();
+                endCpGame('WRONG CHECKPOINT');
             }
         }
 
@@ -1022,16 +1071,18 @@
             cpStartBtn.style.display = 'none';
             cpPlayerEmail.disabled = true;
             cpRoundDisplay.innerText = 'ROUND: 0';
+            clearCpWindow();
 
             addCpRound();
         });
 
-        function endCpGame() {
+        function endCpGame(reason) {
             const finalRound = cpSequence.length > 0 ? cpSequence.length - 1 : 0;
             cpIsPlaying = false;
             cpAcceptingInput = false;
+            clearCpWindow();
             setCpButtonsEnabled(false);
-            cpStatusDisplay.innerText = 'STATUS: MISSION FAILED';
+            cpStatusDisplay.innerText = reason ? `STATUS: ${reason}` : 'STATUS: MISSION FAILED';
             cpStartBtn.style.display = 'inline-block';
             cpStartBtn.innerText = 'RELAY AGAIN';
             cpPlayerEmail.disabled = false;
