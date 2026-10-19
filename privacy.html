@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Notice | Signals Corps Reunion</title>
+    <meta name="description" content="How the Signals Corps Reunion portal handles registration details and challenge scores.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #f0f9ff; --card: #ffffff; --ink: #0f172a; --muted: #475569; --line: #dbeafe; --acc: #0c4a6e; --link: #0369a1; }
+        body.theme-night-ops { --bg: #0a0a0a; --card: #1a1a1a; --ink: #e2e8f0; --muted: #a3a3a3; --line: #262626; --acc: #39ff14; --link: #4ade80; }
+        body.theme-tactical { --bg: #e8ede7; --acc: #2c3e2d; --link: #2c5e2e; --line: #d5ddd3; }
+        body.theme-desert { --bg: #f4ecd8; --acc: #5c4a3d; --link: #9a5b0f; --line: #eadfc6; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; padding: 40px 16px 60px; }
+        main { max-width: 760px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 32px clamp(18px, 5vw, 44px); box-shadow: 0 20px 40px -18px rgba(0,0,0,.18); }
+        .back { display: inline-block; margin-bottom: 18px; color: var(--link); font-weight: 600; text-decoration: none; }
+        .eyebrow { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--acc); font-size: 14px; }
+        h1 { font-family: 'Rajdhani', sans-serif; font-size: 34px; line-height: 1.1; margin: 4px 0 10px; }
+        h2 { font-size: 18px; margin: 28px 0 6px; }
+        p, li { color: var(--muted); }
+        li { margin-bottom: 6px; }
+        strong { color: var(--ink); }
+        a { color: var(--link); font-weight: 600; }
+        .meta { font-size: 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 10px 0; margin: 14px 0 6px; }
+        .meta p { margin: 2px 0; }
+        footer { text-align: center; margin-top: 28px; font-size: 13px; color: var(--muted); }
+    </style>
+</head>
+<body>
+    <main>
+        <a class="back" href="./">← Back to the reunion portal</a>
+        <div class="eyebrow">Signals Corps Reunion</div>
+        <h1>Privacy Notice</h1>
+        <div class="meta">
+            <p><strong>Website:</strong> scr.zyeemzia.com</p>
+            <p><strong>Operated by:</strong> ZyeemZia™ (Zyeem Bin Zia), Dhaka, Bangladesh</p>
+            <p><strong>Last updated:</strong> 19 October 2026</p>
+        </div>
+
+        <h2>1. Summary</h2>
+        <ul>
+            <li><strong>Registration:</strong> handled by Google Forms. What you enter there is used only to organise the reunion.</li>
+            <li><strong>Challenges:</strong> if you play, your email address and score are saved to run the leaderboards. The public board shows only the first two characters of your email.</li>
+            <li><strong>No advertising, no analytics</strong> and no tracking cookies on this site.</li>
+        </ul>
+
+        <h2>2. Registration</h2>
+        <p>The Officers, JCOs, NCOs and Civilians registration buttons open Google Forms. The information you enter in a form, such as your contact, logistical and arrival or departure details and any files you attach, is collected by Google Forms and stored in Google Sheets and Google Drive, where the reunion organisers use it to plan the event. Google's own <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a> applies to how Google processes it.</p>
+
+        <h2>3. Challenge Games and Leaderboards</h2>
+        <p>To rank on a challenge leaderboard you enter an email address. When you finish a challenge, that email address, your score and the challenge name are sent to a Google Apps Script service and stored in a Google Sheet, which produces the top-5 leaderboards. The email address is used only to keep the leaderboard fair and to recognise winners. It is never shown in full: the board shows just the first two characters. It is never used for marketing.</p>
+
+        <h2>4. Information Kept in Your Browser</h2>
+        <p>Your chosen colour theme is saved in your browser's local storage so the site remembers it. It never leaves your device. You can clear it at any time by clearing this site's data in your browser.</p>
+
+        <h2>5. Who Can See Your Information</h2>
+        <p>Registration responses and leaderboard entries are available only to the reunion organisers and to ZyeemZia, who runs the portal. They are not sold or shared with anyone else, except Google, which hosts the forms, sheets and script.</p>
+
+        <h2>6. How Long It Is Kept</h2>
+        <p>Information is kept only as long as needed to organise the reunion and run the challenges. You can ask for your registration or leaderboard entry to be corrected or removed at any time.</p>
+
+        <h2>7. Your Rights</h2>
+        <p>You can ask to see, correct or delete the information held about you, or object to its use. Contact us using the details below and tell us the email address you used.</p>
+
+        <h2>8. Contact</h2>
+        <p>Email <a href="mailto:admin@zyeemzia.com">admin@zyeemzia.com</a>, or use the contact form at the bottom of the <a href="./#contact">reunion portal</a>. Our full policies are at the <a href="https://policy.zyeemzia.com/">ZyeemZia Trust Center</a>.</p>
+    </main>
+    <footer>Copyright © ZyeemZia</footer>
+    <script>try { var t = localStorage.getItem('reunionTheme'); if (t) document.body.className = t; } catch (e) {}</script>
+</body>
+</html>
