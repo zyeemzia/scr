@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://scr.zyeemzia.com/sitemap.xml
